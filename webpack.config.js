@@ -1,8 +1,14 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.js',
   mode:'development',
+  entry:  {
+    index: './src/index.js',
+  },
+  devtool: 'inline-source-map',
+  devServer: {
+    static: './dist',
+    },
   module: {
         rules: [
           {
@@ -12,7 +18,10 @@ module.exports = {
         ],
       },
   output: {
-    filename: 'main.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
+  },
+  optimization: {
+    runtimeChunk: 'single',
   },
 };
