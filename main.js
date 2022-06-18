@@ -116,7 +116,7 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n\nconsole.log('here we are');\n\n\nfunction addToDoList(title, desc, dueDate, priority){\n\n    const showTitle = () => {console.log(title)};\n\n\n    return {\n        showTitle,\n        desc,\n        dueDate,\n        priority\n    }\n\n}\n\nconst test = addToDoList('The Title Is a Title', 'This is a title description', '12/12/12', 'PRIORITY NUMBER ONE');\n\ntest.showTitle();\nconsole.log(test.desc);\n\n\n//# sourceURL=webpack://to-do-list/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n\nconsole.log('here we are');\n\n\nfunction addToDoList(title, desc, dueDate, priority){\n\n    const notPrint = () => { \n        console.log('should not be printed if this not called');\n     }\n\n    return {\n        title,\n        desc,\n        dueDate,\n        priority,\n        showTitle(){\n            return `THIS IS THE TITLE ${title}`;\n            }\n    }\n}\n\nconst test = addToDoList('The Title Is a Title', 'This is a title description', '12/12/12', 'PRIORITY NUMBER ONE');\nconsole.log(test.showTitle());\n\n\n//# sourceURL=webpack://to-do-list/./src/index.js?");
 
 /***/ })
 
