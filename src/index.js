@@ -1,6 +1,7 @@
 import './style.css';
 console.log('here we are');
 
+
 //gather data input tempelate
 function addToDoList(title, desc = '', dueDate, priority = 'Low', checklist = false){ 
     return {
@@ -37,26 +38,31 @@ function arrayToDoList() {
 }
 
 //The Logic after you click add 
-
-const myArray = arrayToDoList();
+const arrayToDo = arrayToDoList();
+const grabDataInput = grabDataFrom();
+const grabDataFrom = () => {
+    //const grabData = document.querySelector('input');
+    return {
+        title: "inputTitle.value",
+        desc: "inputDesc.value",
+        dueDate: "inputDueDate.value",
+        priority: "inputPriority.value",
+        checklist: "inputChecklist.value"
+    }
+}
 
 function actionNewToDoList(){
-
-    //create Array for To Do List
     //create To Do List
-    let task1 = addToDoList('Jemput', 'Jemput keluarga besar di bandara', '09:00 - 12/12/12');
+    //take the parameter from dom
+    let task = addToDoList('Jemput', 'Jemput keluarga besar di bandara', '09:00 - 12/12/12');
     //add the variable of to do list to the aray 
-    myArray.addToArrayList(task1);
-    task1 = addToDoList('Pulang', 'Anter aja pak', '19:00 - 12/12/12');
-   
-    myArray.addToArrayList(task1);
-    myArray.showArrayList(); 
+    arrayToDo.addToArrayList(task);
+    arrayToDo.showArrayList(); 
 }
 
 actionNewToDoList();
 
-
-
+export {addToDoList, arrayToDoList}
 
 
 
