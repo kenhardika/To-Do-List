@@ -1,5 +1,21 @@
-import './style.css';
 console.log('here we are');
+
+//page start
+function onLoadPageStructure() {
+    const header = document.createElement('div');
+    const main = document.createElement('div');
+    const footer = document.createElement('div');
+    const container = document.createElement('div');
+
+    header.className='header';
+    main.className='main';
+    footer.className='footer';
+    container.className='container';
+
+    container.append(header, main, footer);
+    document.body.append(container);
+    console.log('page loaded successfully')
+};
 
 
 //gather data input tempelate
@@ -37,9 +53,12 @@ function arrayToDoList() {
     }
 }
 
+
+
 //The Logic after you click add 
 const arrayToDo = arrayToDoList();
-const grabDataInput = grabDataFrom();
+//const grabDataInput = grabDataFrom();
+
 const grabDataFrom = () => {
     //const grabData = document.querySelector('input');
     return {
@@ -61,13 +80,6 @@ function actionNewToDoList(){
 }
 
 actionNewToDoList();
-
-export {addToDoList, arrayToDoList}
-
-
-
-
-
 
 // const task1 = addToDoList('Jemput', 'Jemput keluarga besar di bandara', '09:00 - 12/12/12');
 // console.log(task1)
@@ -93,3 +105,10 @@ export {addToDoList, arrayToDoList}
 // const addToArray = new ArrayToDoList();
 // addToArray.pushToArray(test);
 // addToArray.pushToArray(kids);
+
+
+window.onload =()=> {
+    onLoadPageStructure();
+}
+
+export {addToDoList, arrayToDoList}

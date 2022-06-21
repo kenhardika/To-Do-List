@@ -1,0 +1,14 @@
+*{
+    background-color: maroon;
+    margin: 0;
+}
+
+.header{
+    height: 20vh;
+}
+.main{
+    height: 70vh;
+}
+.footer{
+    height: 10vh;
+}
