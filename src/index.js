@@ -1,21 +1,22 @@
 console.log('here we are');
 
 //page start
-function onLoadPageStructure() {
-    const header = document.createElement('div');
-    const main = document.createElement('div');
-    const footer = document.createElement('div');
-    const container = document.createElement('div');
+function onLoadHeader() {
+    const header = document.querySelector('.header');
+    const headerContainer = document.createElement('div');
+    const headerTitle = document.createElement('p');
+    const headerTitleDesc = document.createElement('p');
 
-    header.className='header';
-    main.className='main';
-    footer.className='footer';
-    container.className='container';
+    headerContainer.className='headerContainer';
+    headerTitle.className='headerTitle';
+    headerTitle.textContent='The Notes';
+    headerTitleDesc.className='headerTitleDesc';
+    headerTitleDesc.textContent='To-Do-List for your Daily Activity';
 
-    container.append(header, main, footer);
-    document.body.append(container);
-    console.log('page loaded successfully')
-};
+    headerContainer.append(headerTitle,headerTitleDesc);
+
+    header.append(headerContainer);
+}
 
 
 //gather data input tempelate
@@ -108,7 +109,8 @@ actionNewToDoList();
 
 
 window.onload =()=> {
-    onLoadPageStructure();
+    //onLoadPageStructure();
+    onLoadHeader();
 }
 
 export {addToDoList, arrayToDoList}
