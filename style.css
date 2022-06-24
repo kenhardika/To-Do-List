@@ -6,6 +6,7 @@
 :root {
     --fontSizeTitle:clamp(30px, 3vw, 3vw);
     --fontSizeTitleDesc: clamp(14px, 1.2vw, 1.2vw);
+    --fontSizeSidebarNote: clamp(14px, 1.3vw, 1.3vw);
 }
 
 .header{
@@ -40,9 +41,29 @@
     border: 1px solid black;
 }
     .sidebar{
+        display: flex;
+        flex-direction: column;
+
         grid-row: 1/4;
         border: 1px solid black;
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 600;
+        font-size: var(--fontSizeSidebarNote);
     }
+        .sidebarList{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            height: 500px;
+            
+            padding-left: 10px;
+        }
+            .myNotesList, .myProjectsList {
+                height: 150px;
+                font-weight: 200;
+            }
+
 
     .mainbar{
         grid-row: 1/4;
