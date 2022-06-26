@@ -76,14 +76,28 @@ function submitInputForm() {
     const mainbar = document.querySelector('.mainbar');
     mainbar.addEventListener('submit', actionNewToDoList);
   }
+
 function openFormBtn(){
-    const btn = document.querySelector('#openFormInputBtn');
-    btn.addEventListener('click', openInputForm)
+    const btn = document.getElementById('openFormInputBtn');
+    btn.addEventListener('click', ()=>{ toggleOpenClose('.inputForm') });
 }
-function openInputForm(){
-    const form = document.querySelector('.inputForm');
-    form.classList.add('dissappear');
+
+function toggleOpenClose(target){
+    const toggle = document.querySelector(`${target}`);
+        
+        if (toggle.hasAttribute('close','')) {
+            toggle.removeAttribute('close');
+            toggle.setAttribute('open','');
+        }
+        else{
+            toggle.removeAttribute('open');
+            toggle.setAttribute('close','');
+        }
 }
+// function closeInputForm(){
+//     const form = document.querySelector('.inputForm');
+//     form.setAttribute="close";
+// }
 
 window.onload =()=> {
     submitInputForm();
