@@ -69,7 +69,8 @@ function actionNewToDoList(e){
     //add the variable of to do list to the aray 
     arrayToDo.addToArrayList(task);
     console.log(arrayToDo.showArrayList());
-    resetForm()
+    resetForm();
+    toggleOpenClose('.inputForm');
 }
 
 function submitInputForm() {
