@@ -9,6 +9,11 @@
     --fontSizeSidebarNote: clamp(14px, 1.3vw, 1.3vw);
 }
 
+.dissappear{
+    opacity: 0;
+    transition: opacity 0.5ms;
+}
+
 .header{
     display: flex;
     align-items: center;
@@ -70,6 +75,10 @@
         grid-column: 2/4;
                 border: 1px solid black;
     }
+        .inputForm{
+            opacity: 1;
+            transition: opacity 0.5ms;
+        }
 
 .footer{
     height: 10vh;
