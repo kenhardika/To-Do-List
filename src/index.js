@@ -1,24 +1,5 @@
 console.log('here we are');
 
-//page start
-function onLoadHeader() {
-    const header = document.querySelector('.header');
-    const headerContainer = document.createElement('div');
-    const headerTitle = document.createElement('p');
-    const headerTitleDesc = document.createElement('p');
-
-    headerContainer.className='headerContainer';
-    headerTitle.className='headerTitle';
-    headerTitle.textContent='The Notes';
-    headerTitleDesc.className='headerTitleDesc';
-    headerTitleDesc.textContent='To-Do-List for your Daily Activity';
-
-    headerContainer.append(headerTitle,headerTitleDesc);
-
-    header.append(headerContainer);
-}
-
-
 //gather data input tempelate
 function addToDoList(title, dueDate, priority = 'Low', checklist = false){ 
     return {
@@ -53,11 +34,7 @@ function arrayToDoList() {
     }
 }
 
-
-
-
-
-const grabDataFrom = () => {
+const getInput = () => {
     //const grabData = document.querySelector('input');
     return {
         title: ()=>{ 
@@ -75,16 +52,20 @@ const grabDataFrom = () => {
     }
 }
 
+function resetForm() {
+    const input = document.querySelectorAll('[data-input = "userInput"]');
+    input.forEach((inp) => { return inp.value = null });
+}
+
 //The Logic after you click add 
 const arrayToDo = arrayToDoList();
-const grabDataInput = grabDataFrom();
-
+const inputToDo = getInput();
 
 function actionNewToDoList(e){
     e.preventDefault();
     //create To Do List
     //take the parameter from dom
-    let task = addToDoList(grabDataInput.title(),grabDataInput.dueDate(), grabDataInput.priority());
+    let task = addToDoList(inputToDo.title(),inputToDo.dueDate(), inputToDo.priority());
     //add the variable of to do list to the aray 
     arrayToDo.addToArrayList(task);
     console.log(arrayToDo.showArrayList());
@@ -97,8 +78,6 @@ function submitInputForm() {
   }
 
 window.onload =()=> {
-    //onLoadPageStructure();
-    onLoadHeader();
     submitInputForm();
 }
 
