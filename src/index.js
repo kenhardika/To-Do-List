@@ -76,9 +76,18 @@ function submitInputForm() {
     const mainbar = document.querySelector('.mainbar');
     mainbar.addEventListener('submit', actionNewToDoList);
   }
+function openFormBtn(){
+    const btn = document.querySelector('#openFormInputBtn');
+    btn.addEventListener('click', openInputForm)
+}
+function openInputForm(){
+    const form = document.querySelector('.inputForm');
+    form.classList.add('dissappear');
+}
 
 window.onload =()=> {
     submitInputForm();
+    openFormBtn();
 }
 
 export {addToDoList, arrayToDoList}
