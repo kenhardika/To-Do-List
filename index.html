@@ -15,7 +15,10 @@
 
 <div class="container">
   <div class="header">
-
+    <div class="headerContainer">
+      <p class="headerTitle">The Notes</p>
+      <p class="headerTitleDesc">To-Do-List for your Daily Activity</p>
+    </div>
   </div>
   <div class="main">
 
@@ -43,10 +46,10 @@
       <div class="inputSection">
         <button id="openFormInputBtn">+</button>
         <form action="" class="inputForm">
-          <input type="text" id="inputTitle" placeholder="What's on your Schedule">
-          <input type="date" id="inputDate">
+          <input type="text" id="inputTitle" data-input="userInput" placeholder="What's on your Schedule">
+          <input type="date" id="inputDate" data-input="userInput">
           <label for="priority" id="labelPriority">Priority:</label>
-          <select id="inputPriority" name="priority">
+          <select id="inputPriority" name="priority" >
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
             <option value="High">High</option>
