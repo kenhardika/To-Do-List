@@ -39,7 +39,23 @@
 
         </div>
     </div>
-    <div class="mainbar"> </div>
+    <div class="mainbar">
+      <div class="inputSection">
+        <button id="openFormInputBtn">+</button>
+        <form action="" class="inputForm">
+          <input type="text" id="inputTitle" placeholder="What's on your Schedule">
+          <input type="date" id="inputDate">
+          <label for="priority" id="labelPriority">Priority:</label>
+          <select id="inputPriority" name="priority">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+          <input type="submit" id="submitInput" value="Add">
+        </form>
+      </div>
+      <div class="outputSection"></div>
+    </div>
 
   </div>
   <div class="footer">

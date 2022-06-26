@@ -20,10 +20,9 @@ function onLoadHeader() {
 
 
 //gather data input tempelate
-function addToDoList(title, desc = '', dueDate, priority = 'Low', checklist = false){ 
+function addToDoList(title, dueDate, priority = 'Low', checklist = false){ 
     return {
         title,
-        desc,
         dueDate,
         priority,
         checklist
@@ -35,7 +34,7 @@ function arrayToDoList() {
     let arrayList = [];
 
     function showArrayList(){
-        console.log(arrayList);
+       return arrayList;
     }
 
     function addToArrayList(data){
@@ -56,61 +55,51 @@ function arrayToDoList() {
 
 
 
-//The Logic after you click add 
-const arrayToDo = arrayToDoList();
-//const grabDataInput = grabDataFrom();
+
 
 const grabDataFrom = () => {
     //const grabData = document.querySelector('input');
     return {
-        title: "inputTitle.value",
-        desc: "inputDesc.value",
-        dueDate: "inputDueDate.value",
-        priority: "inputPriority.value",
-        checklist: "inputChecklist.value"
+        title: ()=>{ 
+            const input = document.getElementById('inputTitle');
+            return input.value
+        },
+        dueDate: ()=>{ 
+            const input = document.getElementById('inputDate');
+            return input.value
+        },
+        priority: ()=>{ 
+            const input = document.getElementById('inputPriority');
+            return input.value
+        }
     }
 }
 
-function actionNewToDoList(){
+//The Logic after you click add 
+const arrayToDo = arrayToDoList();
+const grabDataInput = grabDataFrom();
+
+
+function actionNewToDoList(e){
+    e.preventDefault();
     //create To Do List
     //take the parameter from dom
-    let task = addToDoList('Jemput', 'Jemput keluarga besar di bandara', '09:00 - 12/12/12');
+    let task = addToDoList(grabDataInput.title(),grabDataInput.dueDate(), grabDataInput.priority());
     //add the variable of to do list to the aray 
     arrayToDo.addToArrayList(task);
-    arrayToDo.showArrayList(); 
+    console.log(arrayToDo.showArrayList());
+    resetForm()
 }
 
-actionNewToDoList();
-
-// const task1 = addToDoList('Jemput', 'Jemput keluarga besar di bandara', '09:00 - 12/12/12');
-// console.log(task1)
-// const myObj = { title: 'Jemput', desc: 'Jemput keluarga besar di bandara', dueDate: '09:00 - 12/12/12', priority: 'Urgent'};
-// console.log(myObj);
-
-////// IF U USE CLASS
-// class ArrayToDoList {
-//     constructor(){
-//         this.array = [];
-//     }
-
-//     pushToArray(elem){
-//         this.array.push(elem);
-//         console.log(this.array);
-//     }
-
-//     callTheArray() {
-//         return this.array;
-//     }
-// }
-
-// const addToArray = new ArrayToDoList();
-// addToArray.pushToArray(test);
-// addToArray.pushToArray(kids);
-
+function submitInputForm() {
+    const mainbar = document.querySelector('.mainbar');
+    mainbar.addEventListener('submit', actionNewToDoList);
+  }
 
 window.onload =()=> {
     //onLoadPageStructure();
     onLoadHeader();
+    submitInputForm();
 }
 
 export {addToDoList, arrayToDoList}
