@@ -72,7 +72,8 @@ function actionNewToDoList(e){
     resetForm();
     toggleOpenClose('inputForm');
     //console.log(fetchToDoList('dueDate').toString());
-    displayToDoList('outputSection');
+    //displayToDoList('outputSection');
+    showToDoList('outputSection');
 }
 
 function submitInputForm() {
@@ -103,13 +104,48 @@ function fetchToDoList(dataType) {
     return arrayToDo.arrayList.map((array)=>{ return array[dataType]});
 }
 
-function displayToDoList(targetClass) {
+function fetchToDoListArray(){
+    return arrayToDo.arrayList.forEach( (array) => {return array});
+}
+
+// function displayToDoList(targetClass) {
+//     const layerTarget = document.querySelector(`.${targetClass}`);
+//     clearDisplay(layerTarget);
+//     createCard()
+//     console.log(fetchToDoListArray());
+//     layerTarget.append(createCard());
+//     return layerTarget
+// }
+
+function showToDoList(targetClass) {
     const layerTarget = document.querySelector(`.${targetClass}`);
     clearDisplay(layerTarget);
-    const text = fetchToDoList('title').toString();
-    // text.className ='displayText';
-    return layerTarget.append(text);
+
+    function loopArray(targetClass) {
+        for (let list of arrayToDo.arrayList) {
+            appendToDoList(list, targetClass);
+        }
+    }
+    loopArray(targetClass);
 }
+
+function appendToDoList(list, targetClass){
+    const layerTarget = document.querySelector(`.${targetClass}`);
+    const layerCard = document.createElement('div');
+    layerCard.className='layerCard';
+    const text = list.title;
+    const due = list.dueDate;
+    layerCard.append(text, due);
+    layerTarget.append(layerCard);
+}
+
+// function createCard(){
+//     const layerCard = document.createElement('div');
+//     layerCard.className='layerCard';
+//     const text = fetchToDoList('title').toString();
+//     layerCard.append(text);
+//     return layerCard
+// }
 
 function clearDisplay(parent) {
     while (parent.firstChild) {
