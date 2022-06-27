@@ -70,7 +70,9 @@ function actionNewToDoList(e){
     arrayToDo.addToArrayList(task);
     console.log(arrayToDo.showArrayList());
     resetForm();
-    toggleOpenClose('.inputForm');
+    toggleOpenClose('inputForm');
+    //console.log(fetchToDoList('dueDate').toString());
+    displayToDoList('outputSection');
 }
 
 function submitInputForm() {
@@ -80,11 +82,11 @@ function submitInputForm() {
 
 function openFormBtn(){
     const btn = document.getElementById('openFormInputBtn');
-    btn.addEventListener('click', ()=>{ toggleOpenClose('.inputForm') });
+    btn.addEventListener('click', ()=>{ toggleOpenClose('inputForm') });
 }
 
 function toggleOpenClose(target){
-    const toggle = document.querySelector(`${target}`);
+    const toggle = document.querySelector(`.${target}`);
         
         if (toggle.hasAttribute('close','')) {
             toggle.removeAttribute('close');
@@ -95,10 +97,25 @@ function toggleOpenClose(target){
             toggle.setAttribute('close','');
         }
 }
-// function closeInputForm(){
-//     const form = document.querySelector('.inputForm');
-//     form.setAttribute="close";
-// }
+
+function fetchToDoList(dataType) {
+    //get the To Do List from array
+    return arrayToDo.arrayList.map((array)=>{ return array[dataType]});
+}
+
+function displayToDoList(targetClass) {
+    const layerTarget = document.querySelector(`.${targetClass}`);
+    clearDisplay(layerTarget);
+    const text = fetchToDoList('title').toString();
+    // text.className ='displayText';
+    return layerTarget.append(text);
+}
+
+function clearDisplay(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
 
 window.onload =()=> {
     submitInputForm();
