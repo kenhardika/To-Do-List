@@ -73,7 +73,10 @@
     .mainbar{
         grid-row: 1/4;
         grid-column: 2/4;
-                border: 1px solid black;
+        border: 1px solid black;
+
+        display: flex;
+        flex-direction: column;
     }
         .inputForm[open]{
             display: block;
