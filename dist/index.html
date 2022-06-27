@@ -1,9 +1,70 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>To Do List</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"><script defer src="runtime.js"></script><script defer src="index.js"></script></head>
-  <body>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To Do List</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="index.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&family=Mulish:wght@200;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="headerContainer">
+      <p class="headerTitle">The Notes</p>
+      <p class="headerTitleDesc">To-Do-List for your Daily Activity</p>
+    </div>
+  </div>
+  <div class="main">
+
+    <div class="sidebar"> 
+        <div class="sidebarList">
+        
+          <div class="myNotes">
+            <p>My Notes</p>
+            <ul class="myNotesList">
+              <li>asd</li>
+              <li>asd</li>
+            </ul>
+          </div>
+          <div class="myProjects">
+            <p>My Projects</p>
+            <ul class="myProjectsList">  
+              <li>asd</li>
+              <li>asd</li>
+            </ul>
+          </div>
+
+        </div>
+    </div>
+    <div class="mainbar">
+      <div class="inputSection">
+        <button id="openFormInputBtn">+</button>
+        <form action="" class="inputForm" close>
+          <input type="text" id="inputTitle" data-input="userInput" placeholder="What's on your Schedule" required>
+          <input type="date" id="inputDate" data-input="userInput" required>
+          <label for="priority" id="labelPriority">Priority:</label>
+          <select id="inputPriority" name="priority" required>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+          <input type="submit" id="submitInput" value="Add">
+        </form>
+      </div>
+      <div class="outputSection"></div>
+    </div>
+
+  </div>
+  <div class="footer">
+
+  </div>
+</div>
+
+</body>
 </html>
