@@ -1,21 +1,31 @@
 function createDiv(name){
     const layer = document.createElement('div');
     layer.className = `${name}`;
-    return layer
+    return layer;
 }
 function createToDoDiv(list, name){
     const layer = createDiv(name);
+    console.log(typeof(list[name]));
     layer.append(list[`${name}`]);
-    return layer
+    return layer;
 }
 
 function toDoListLayer(list){
     return {
-        check: ()=> { return createToDoDiv(list, 'checklist')},
+        check: ()=> {
+            const layer = createDiv('checklist');
+            layer.append(checklistCondition(list));
+            return layer; 
+        },
         title: ()=> { return createToDoDiv(list, 'title')},
         dueDate: ()=> { return createToDoDiv(list, 'dueDate')},
         priority: ()=> { return createToDoDiv(list, 'priority')}
     }
+}
+
+function checklistCondition(list){
+    if (list.checklist == false) return '✕';
+    else return '✓';
 }
 
 function toDoListCard(list){
