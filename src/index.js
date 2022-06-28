@@ -27,7 +27,7 @@ function arrayToDoList() {
     }
 
     return{
-        arrayList,
+        arrayList: ()=>{ return Array.from(arrayList) },
         showArrayList,
         addToArrayList,
         removeFromArrayList
@@ -100,9 +100,11 @@ function toggleOpenClose(target){
 function showToDoList(targetClass) {
     const layerTarget = document.querySelector(`.${targetClass}`);
     clearDisplay(layerTarget);
-
+    console.log('showToDoList');
+    console.log(arrayToDo.arrayList());
     function loopArray(targetClass) {
-        for (let list of arrayToDo.arrayList) {
+        for (let list of arrayToDo.arrayList().reverse()) {
+            console.log(list);
             appendToDoList(list, targetClass);
         }
     }
