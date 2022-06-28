@@ -1,6 +1,7 @@
 *{
     background-color: maroon;
     margin: 0;
+    box-sizing: border-box;
 }
 
 :root {
@@ -87,6 +88,11 @@
             display: none;
             /* opacity: 0;
             transition: opacity 0.5ms; */
+        }
+
+        .toDoList{
+            display: flex;
+            flex-direction: row;
         }
 
 .footer{
