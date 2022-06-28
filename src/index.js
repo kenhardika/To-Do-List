@@ -1,3 +1,5 @@
+import toDoListCard from "./toDoList";
+
 console.log('here we are');
 
 //gather data input tempelate
@@ -86,7 +88,6 @@ function openFormBtn(){
 
 function toggleOpenClose(target){
     const toggle = document.querySelector(`.${target}`);
-        
         if (toggle.hasAttribute('close','')) {
             toggle.removeAttribute('close');
             toggle.setAttribute('open','');
@@ -100,8 +101,6 @@ function toggleOpenClose(target){
 function showToDoList(targetClass) {
     const layerTarget = document.querySelector(`.${targetClass}`);
     clearDisplay(layerTarget);
-    console.log('showToDoList');
-    console.log(arrayToDo.arrayList());
     function loopArray(targetClass) {
         for (let list of arrayToDo.arrayList().reverse()) {
             console.log(list);
@@ -116,13 +115,6 @@ function appendToDoList(list, targetClass){
     layerTarget.append(toDoListCard(list));
 }
 
-function toDoListCard(list){
-    const layerCard = document.createElement('div');
-    layerCard.className = 'ToDoList';
-    layerCard.append(list.title, list.dueDate, list.priority);
-    return layerCard
-}
-
 function clearDisplay(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
@@ -134,4 +126,4 @@ window.onload =()=> {
     openFormBtn();
 }
 
-export {addToDoList, arrayToDoList}
+export {addToDoList, arrayToDoList, arrayToDo}
