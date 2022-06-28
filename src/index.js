@@ -42,8 +42,8 @@ const getInput = () => {
             return input.value
         },
         dueDate: ()=>{ 
-            const input = document.getElementById('inputDate');
-            return input.value
+            const input = new Date(document.getElementById('inputDate').value);
+            return ` ${input.getDate()} - ${input.getMonth()+1} - ${input.getFullYear()} ` ; //should try moment.js later
         },
         priority: ()=>{ 
             const input = document.getElementById('inputPriority');
@@ -71,8 +71,6 @@ function actionNewToDoList(e){
     console.log(arrayToDo.showArrayList());
     resetForm();
     toggleOpenClose('inputForm');
-    //console.log(fetchToDoList('dueDate').toString());
-    //displayToDoList('outputSection');
     showToDoList('outputSection');
 }
 
@@ -99,24 +97,6 @@ function toggleOpenClose(target){
         }
 }
 
-function fetchToDoList(dataType) {
-    //get the To Do List from array
-    return arrayToDo.arrayList.map((array)=>{ return array[dataType]});
-}
-
-function fetchToDoListArray(){
-    return arrayToDo.arrayList.forEach( (array) => {return array});
-}
-
-// function displayToDoList(targetClass) {
-//     const layerTarget = document.querySelector(`.${targetClass}`);
-//     clearDisplay(layerTarget);
-//     createCard()
-//     console.log(fetchToDoListArray());
-//     layerTarget.append(createCard());
-//     return layerTarget
-// }
-
 function showToDoList(targetClass) {
     const layerTarget = document.querySelector(`.${targetClass}`);
     clearDisplay(layerTarget);
@@ -131,21 +111,15 @@ function showToDoList(targetClass) {
 
 function appendToDoList(list, targetClass){
     const layerTarget = document.querySelector(`.${targetClass}`);
-    const layerCard = document.createElement('div');
-    layerCard.className='layerCard';
-    const text = list.title;
-    const due = list.dueDate;
-    layerCard.append(text, due);
-    layerTarget.append(layerCard);
+    layerTarget.append(toDoListCard(list));
 }
 
-// function createCard(){
-//     const layerCard = document.createElement('div');
-//     layerCard.className='layerCard';
-//     const text = fetchToDoList('title').toString();
-//     layerCard.append(text);
-//     return layerCard
-// }
+function toDoListCard(list){
+    const layerCard = document.createElement('div');
+    layerCard.className = 'ToDoList';
+    layerCard.append(list.title, list.dueDate, list.priority);
+    return layerCard
+}
 
 function clearDisplay(parent) {
     while (parent.firstChild) {
