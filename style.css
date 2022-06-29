@@ -65,9 +65,10 @@
 
             padding-left: 10px;
         }
-            .myNotesList, .myProjectsList {
+            .myNoteList, .myProjectList {
                 height: 150px;
                 font-weight: 200;
+                overflow: hidden;
             }
 
 
