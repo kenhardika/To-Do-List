@@ -1,4 +1,5 @@
-import toDoListCard from "./toDoList";
+import { showToDoListSidebar } from "./sidebar";
+import { toDoListCard } from "./toDoList";
 
 console.log('here we are');
 
@@ -74,6 +75,7 @@ function actionNewToDoList(e){
     resetForm();
     toggleOpenClose('inputForm');
     showToDoList('outputSection');
+    showToDoListSidebar('myNoteList');
 }
 
 function submitInputForm() {
@@ -101,18 +103,23 @@ function toggleOpenClose(target){
 function showToDoList(targetClass) {
     const layerTarget = document.querySelector(`.${targetClass}`);
     clearDisplay(layerTarget);
-    function loopArray(targetClass) {
-        for (let list of arrayToDo.arrayList().reverse()) {
-            console.log(list);
-            appendToDoList(list, targetClass);
-        }
-    }
-    loopArray(targetClass);
+    loopArray(targetClass).allCard();
 }
 
-function appendToDoList(list, targetClass){
+function loopArray(targetClass) {
     const layerTarget = document.querySelector(`.${targetClass}`);
-    layerTarget.append(toDoListCard(list));
+    return{ 
+        allCard: 
+            ()=>{   for (let list of arrayToDo.arrayList().reverse()) {
+                        layerTarget.append(toDoListCard(list).allCard());
+                    }
+                },
+        titleCard:
+            ()=>{   for (let list of arrayToDo.arrayList()) {
+                        layerTarget.append(toDoListCard(list).titleCard());
+                    }
+                }
+    }
 }
 
 function clearDisplay(parent) {
@@ -126,4 +133,4 @@ window.onload =()=> {
     openFormBtn();
 }
 
-export {addToDoList, arrayToDoList, arrayToDo}
+export {addToDoList, arrayToDoList, loopArray, clearDisplay, arrayToDo}

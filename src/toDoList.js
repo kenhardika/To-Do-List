@@ -5,7 +5,7 @@ function createDiv(name){
 }
 function createToDoDiv(list, name){
     const layer = createDiv(name);
-    console.log(typeof(list[name]));
+    // console.log(typeof(list[name]));
     layer.append(list[`${name}`]);
     return layer;
 }
@@ -28,11 +28,18 @@ function checklistCondition(list){
     else return '✓';
 }
 
+//change so it can be partial wheter you wanna append title only
 function toDoListCard(list){
     const layer = createDiv('toDoList');
-    layer.append(toDoListLayer(list).check(), toDoListLayer(list).title(), toDoListLayer(list).dueDate(), toDoListLayer(list).priority());
-    return layer
+    return {
+        allCard: ()=>{
+            layer.append(toDoListLayer(list).check(), toDoListLayer(list).title(), toDoListLayer(list).dueDate(), toDoListLayer(list).priority());
+            return layer },
+        titleCard: ()=>{
+            layer.append(toDoListLayer(list).title());
+            return layer } 
+    };
 }
 
 
-export default toDoListCard
+export {toDoListCard, toDoListLayer}
