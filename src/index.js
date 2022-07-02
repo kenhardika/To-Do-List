@@ -128,9 +128,23 @@ function clearDisplay(parent) {
     }
 }
 
+function todaysDate(){
+    const maxOneDigit = 9;
+    const date = new Date();
+    if(date.getMonth()+1 < maxOneDigit)
+    return `${date.getFullYear()}-0${date.getMonth()+1}-0${date.getDate()}` //this wont work if the date is more than 1 digit
+}
+
+function setTodaysDate(){
+    console.log(todaysDate());
+    const dateInput = document.getElementById('inputDate');
+    dateInput.setAttribute('min', `${todaysDate()}`)
+}
+
 window.onload =()=> {
     submitInputForm();
     openFormBtn();
+    setTodaysDate();
 }
 
 export {addToDoList, arrayToDoList, loopArray, clearDisplay, arrayToDo}
