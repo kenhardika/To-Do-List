@@ -4,14 +4,15 @@
 }
 
 :root {
-    --baseColor: #3D5A80;
+    --baseColor: #fafaf8;
     /* --fontColorHeader: #98C1D9; */
-    --lightBlue: #98C1D9;
-    --darkBlue: #293241;
+
+    --fontColor: #eabc1b;
+    --fontBlack: #332e2a;
     --shadowColor: #0000004d;
     --orangeTangerine: #EE6C4D;
 
-    --fontSizeTitle:clamp(30px, 3vw, 3vw);
+    --fontSizeTitle:clamp(30px, 2.2vw, 3vw);
     --fontSizeTitleDesc: clamp(14px, 1.2vw, 1.2vw);
     --fontSizeSidebarNote: clamp(14px, 1.3vw, 1.3vw);
 }
@@ -20,10 +21,11 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    height: 20vh;
-    background-color: var(--darkBlue);
-    color: var(--lightBlue) ;
-    text-shadow: 2px 4px 4px var(--shadowColor);
+    height: 10vh;
+    background-color: var(--baseColor);
+    color: var(--fontColor) ;
+    /* text-shadow: 2px 4px 4px var(--shadowColor); */
+    border-bottom: 10px solid var(--orangeTangerine);
 }           
 
 .headerContainer{
@@ -33,6 +35,7 @@
         font-size: var(--fontSizeTitle);
         font-family:'Mulish', sans-serif;
         font-weight: 600;
+        color: var(--fontBlack);
     }
 
     .headerTitleDesc{
@@ -43,25 +46,26 @@
 
 .main{
     display: grid;
-    height: 70vh;
+    height: 85vh;
 
-    grid-template-columns: 0.5fr 1fr 1fr;
+    grid-template-columns: 0.3fr 1fr 1fr;
     grid-template-rows: repeat(3, 1fr);
 
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
     .sidebar{
         display: flex;
         flex-direction: column;
 
-        background-color: var(--darkBlue);
-        color: var(--lightBlue);
-        text-shadow: 2px 4px 4px #0000004d;
+        background-color: var(--baseColor);
+        color: var(--fontBlack);
+        /* text-shadow: 2px 4px 4px #0000004d; */
         grid-row: 1/4;
-        border: 1px solid black;
+        /* border: 1px solid black; */
         font-family: 'DM Sans', sans-serif;
         font-weight: 600;
         font-size: var(--fontSizeSidebarNote);
+        border-right: 2px solid var(--orangeTangerine);
     }
         .sidebarList{
             display: flex;
@@ -76,14 +80,21 @@
                 height: 150px;
                 font-weight: 200;
                 overflow: hidden;
+
+            }
+
+            .myProjects p, .myNotes p {
+                padding: 10px;
+                border: 2px solid var(--orangeTangerine);
+                border-radius: 20px;
             }
 
 
     .mainbar{
         grid-row: 1/4;
         grid-column: 2/4;
-        border: 1px solid black;
-        background-color: var(--darkBlue);
+        /* border: 1px solid black; */
+        background-color: var(--baseColor   );
 
         display: flex;
         flex-direction: column;
@@ -105,8 +116,10 @@
         }
 
 .footer{
-    background-color: var(--darkBlue);
-    height: 10vh;
+    background-color: var(--baseColor);
+    border-top: 2px solid var(--orangeTangerine);
+    border-bottom: 10px solid var(--orangeTangerine);
+    height: 5vh;
 }
 
 @keyframes fade-in{
