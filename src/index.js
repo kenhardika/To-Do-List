@@ -5,45 +5,30 @@ console.log('here we are');
 
 //gather data input tempelate
 function addToDoList(title, dueDate, priority = 'Low', checklist = false){ 
-    return {
-        title,
-        dueDate,
-        priority,
-        checklist,
-        // removeList: (removedTitle)=> {
-        //     arrayToDo.arrayList = arrayToDo.arrayList.filter((array)=> array.title !== removedTitle);
-        //     console.log(arrayToDo.arrayList);
-        //     console.log(arrayToDo.showArrayList());
-        //     return arrayToDo.arrayList
-        //}
-    }
-}
-
-//create Array to save to do list tempelate
-function arrayToDoList() {
     let arrayList = [];
 
     function showArrayList(){
-       return arrayList;
-    }
+        return arrayList;
+     }
 
     function addToArrayList(data){
         arrayList.push(data) 
     }
 
     function removeFromArrayList(removedTitle){
-       return arrayList = arrayList.filter((array)=> array.title !== removedTitle);
+        return arrayList = arrayList.filter((array)=> array.title !== removedTitle);
     }
 
-    return{
-        arrayList,
+    return {
+        title,
+        dueDate,
+        priority,
+        checklist,
         showArrayList,
         addToArrayList,
         removeFromArrayList
     }
 }
-
-
 
 const getInput = () => {
     //const grabData = document.querySelector('input');
@@ -69,7 +54,7 @@ function resetForm() {
 }
 
 //The Logic after you click add 
-const arrayToDo = arrayToDoList();
+const arrayToDo = addToDoList();
 const inputToDo = getInput();
 
 function actionNewToDoList(e){
@@ -85,11 +70,6 @@ function actionNewToDoList(e){
     showToDoList('outputSection');
     showToDoListSidebar('myNoteList');
 }
-
-//function removeFromArrayList(list){
-    // arrayToDo = list.filter((array)=> array.title !== removedTitle);
-    // return arrayToDo
-//}
 
 function submitInputForm() {
     const mainbar = document.querySelector('.mainbar');
@@ -123,13 +103,12 @@ function loopArray(targetClass) {
     const layerTarget = document.querySelector(`.${targetClass}`);
     return{ 
         allCard: 
-            ()=>{   for (let list of arrayToDo.arrayList.reverse()) {
+            ()=>{   for (let list of arrayToDo.showArrayList()) {
                         layerTarget.append(toDoListCard(list).allCard());
-                        console.log(list.title);
                     }
                 },
         titleCard:
-            ()=>{   for (let list of arrayToDo.arrayList.reverse()) {
+            ()=>{   for (let list of arrayToDo.showArrayList()) {
                         layerTarget.append(toDoListCard(list).titleCard());
                     }
                 }
@@ -161,4 +140,4 @@ window.onload =()=> {
     // setTodaysDate();
 }
 
-export {addToDoList, arrayToDoList, loopArray, clearDisplay,showToDoList, showToDoListSidebar, arrayToDo}
+export {addToDoList, loopArray, clearDisplay,showToDoList, showToDoListSidebar, arrayToDo}
