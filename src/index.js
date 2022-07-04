@@ -9,7 +9,13 @@ function addToDoList(title, dueDate, priority = 'Low', checklist = false){
         title,
         dueDate,
         priority,
-        checklist
+        checklist,
+        // removeList: (removedTitle)=> {
+        //     arrayToDo.arrayList = arrayToDo.arrayList.filter((array)=> array.title !== removedTitle);
+        //     console.log(arrayToDo.arrayList);
+        //     console.log(arrayToDo.showArrayList());
+        //     return arrayToDo.arrayList
+        //}
     }
 }
 
@@ -30,12 +36,14 @@ function arrayToDoList() {
     }
 
     return{
-        arrayList: ()=>{ return Array.from(arrayList) },
+        arrayList,
         showArrayList,
         addToArrayList,
         removeFromArrayList
     }
 }
+
+
 
 const getInput = () => {
     //const grabData = document.querySelector('input');
@@ -78,6 +86,11 @@ function actionNewToDoList(e){
     showToDoListSidebar('myNoteList');
 }
 
+//function removeFromArrayList(list){
+    // arrayToDo = list.filter((array)=> array.title !== removedTitle);
+    // return arrayToDo
+//}
+
 function submitInputForm() {
     const mainbar = document.querySelector('.mainbar');
     mainbar.addEventListener('submit', actionNewToDoList);
@@ -110,12 +123,13 @@ function loopArray(targetClass) {
     const layerTarget = document.querySelector(`.${targetClass}`);
     return{ 
         allCard: 
-            ()=>{   for (let list of arrayToDo.arrayList().reverse()) {
+            ()=>{   for (let list of arrayToDo.arrayList.reverse()) {
                         layerTarget.append(toDoListCard(list).allCard());
+                        console.log(list.title);
                     }
                 },
         titleCard:
-            ()=>{   for (let list of arrayToDo.arrayList()) {
+            ()=>{   for (let list of arrayToDo.arrayList.reverse()) {
                         layerTarget.append(toDoListCard(list).titleCard());
                     }
                 }
@@ -128,23 +142,23 @@ function clearDisplay(parent) {
     }
 }
 
-function todaysDate(){
-    const maxOneDigit = 9;
-    const date = new Date();
-    if(date.getMonth()+1 < maxOneDigit)
-    return `${date.getFullYear()}-0${date.getMonth()+1}-0${date.getDate()}` //this wont work if the date is more than 1 digit
-}
+// function todaysDate(){
+//     const maxOneDigit = 9;
+//     const date = new Date();
+//     if(date.getMonth()+1 < maxOneDigit && date.getDay() < maxOneDigit)
+//     return `${date.getFullYear()}-0${date.getMonth()+1}-0${date.getDate()}` //this wont work if the date is more than 1 digit
+// }
 
-function setTodaysDate(){
-    console.log(todaysDate());
-    const dateInput = document.getElementById('inputDate');
-    dateInput.setAttribute('min', `${todaysDate()}`)
-}
+// function setTodaysDate(){
+//     console.log(todaysDate());
+//     const dateInput = document.getElementById('inputDate');
+//     dateInput.setAttribute('min', `${todaysDate()}`)
+//}
 
 window.onload =()=> {
     submitInputForm();
     openFormBtn();
-    setTodaysDate();
+    // setTodaysDate();
 }
 
-export {addToDoList, arrayToDoList, loopArray, clearDisplay, arrayToDo}
+export {addToDoList, arrayToDoList, loopArray, clearDisplay,showToDoList, showToDoListSidebar, arrayToDo}

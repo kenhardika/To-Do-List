@@ -1,3 +1,5 @@
+import { arrayToDo, showToDoList, showToDoListSidebar } from ".";
+
 function createDiv(name){
     const layer = document.createElement('div');
     layer.className = `${name}`;
@@ -8,6 +10,27 @@ function createToDoDiv(list, name){
     // console.log(typeof(list[name]));
     layer.append(list[`${name}`]);
     return layer;
+}
+
+function createDeleteListBtn(list){
+    const layer = createDiv('deleteThisList');
+    const delbtn = document.createElement('button');
+    delbtn.id='deleteList';
+    delbtn.textContent='delete';
+    delbtn.onclick = ()=>{ deleteListFunction(list) };
+    layer.append(delbtn);
+    return layer;
+}
+
+function deleteListFunction(list){
+    
+    arrayToDo.removeFromArrayList(list.title);
+    
+    console.log(arrayToDo.arrayList);
+    console.log(arrayToDo.showArrayList());
+    
+    showToDoList('outputSection');
+    showToDoListSidebar('myNoteList');
 }
 
 function toDoListLayer(list){
@@ -33,7 +56,7 @@ function toDoListCard(list){
     const layer = createDiv('toDoList');
     return {
         allCard: ()=>{
-            layer.append(toDoListLayer(list).check(), toDoListLayer(list).title(), toDoListLayer(list).dueDate(), toDoListLayer(list).priority());
+            layer.append(toDoListLayer(list).check(), toDoListLayer(list).title(), toDoListLayer(list).dueDate(), toDoListLayer(list).priority(), createDeleteListBtn(list));
             return layer },
         titleCard: ()=>{
             layer.append(toDoListLayer(list).title());
