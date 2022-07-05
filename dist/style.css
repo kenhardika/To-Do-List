@@ -15,6 +15,7 @@
     --fontSizeTitle:clamp(30px, 2.2vw, 3vw);
     --fontSizeTitleDesc: clamp(14px, 1.2vw, 1.2vw);
     --fontSizeSidebarNote: clamp(14px, 1.3vw, 1.3vw);
+    --fontSizeSidebarList: clamp(10px, 1vw, 1vw);
 }
 
 .header{
@@ -64,30 +65,59 @@
         /* border: 1px solid black; */
         font-family: 'DM Sans', sans-serif;
         font-weight: 600;
-        font-size: var(--fontSizeSidebarNote);
-        border-right: 2px solid var(--orangeTangerine);
+        
+        border-right: 5px solid var(--orangeTangerine);
     }
         .sidebarList{
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            justify-content: center;
-            height: 500px;
 
+            padding-top: 80px;
+            gap: 25px;
+            height: 500px;
+            font-size: var(--fontSizeSidebarNote);
             padding-left: 10px;
         }
-            .myNoteList, .myProjectList {
-                height: 150px;
-                font-weight: 200;
-                overflow: hidden;
-
-            }
-
-            .myProjects p, .myNotes p {
-                padding: 10px;
-                border: 2px solid var(--orangeTangerine);
-                border-radius: 20px;
-            }
+            .myNotes, .myProjects{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 12vw;
+            }    
+                .myNoteList, .myProjectList {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+                    font-weight: 200;
+                    overflow: hidden;
+                }
+                    .myNoteList .toDoList:first-child{
+                        padding-top: 10px;
+                    }
+                    .myNoteList .toDoList {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: var(--fontSizeSidebarList);
+                        color: var(--fontColor);
+                    }
+                    
+                .myProjects p, .myNotes p {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: left;
+                    
+                    gap: 10px;
+                    padding: 7px;
+                    width: 180px;
+                    border: 2px solid var(--orangeTangerine);
+                    border-radius: 20px;
+                    background-color: var(--orangeTangerine);
+                    color: var(--baseColor);
+                }
 
 
     .mainbar{
@@ -99,25 +129,68 @@
         display: flex;
         flex-direction: column;
     }
-        .inputForm[open]{
-            display: block;
-            /* opacity: 1;
-            transition: opacity 0.5ms; */ 
-        }
-        .inputForm[close]{
-            display: none;
-            /* opacity: 0;
-            transition: opacity 0.5ms; */
-        }
-
-        .toDoList{
+        .inputSection{
             display: flex;
             flex-direction: row;
+            padding: 20px;
+            gap: 2vw;
+            align-items: center;
         }
+            #openFormInputBtn{
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                border: none;
+                background-color: var(--orangeTangerine);
+                color: white;
+                font-size: 40px;
+            }
+            #openFormInputBtn:hover {
+                background-color: #ff886b;
+            }
+            #openFormInputBtn:active {
+                transform: translateY(2px);
+            }
+            .inputSection input, .inputSection select {
+                background-color: var(--baseColor);
+                border-radius: 20px;
+            }
+
+            #submitInput{
+                width: 60px;
+                height: 20px;
+                border-radius: 20px;
+                border: none;
+                background-color: var(--orangeTangerine);
+                color: white;
+                font-size: 16px;
+            }
+            #submitInput:hover {
+                background-color: #ff886b;
+            }
+            #submitInput:active {
+                transform: translateY(2px);
+            }
+
+            .inputForm[open]{
+                display: block;
+                /* opacity: 1;
+                transition: opacity 0.5ms; */ 
+            }
+            .inputForm[close]{
+                display: none;
+                /* opacity: 0;
+                transition: opacity 0.5ms; */
+            }
+
+            .toDoList{
+                display: flex;
+                flex-direction: row;
+            }
 
 .footer{
     background-color: var(--baseColor);
-    border-top: 2px solid var(--orangeTangerine);
+    border-top: 5px solid var(--orangeTangerine);
     border-bottom: 10px solid var(--orangeTangerine);
     height: 5vh;
 }

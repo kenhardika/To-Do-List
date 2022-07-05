@@ -23,12 +23,7 @@ function createDeleteListBtn(list){
 }
 
 function deleteListFunction(list){
-
     arrayToDo.removeFromArrayList(list.title);
-    
-    // console.log(arrayToDo.arrayList);
-    // console.log(arrayToDo.showArrayList());
-    
     showToDoList('outputSection');
     showToDoListSidebar('myNoteList');
 }
