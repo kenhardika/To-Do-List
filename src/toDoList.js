@@ -54,7 +54,25 @@ function toDoListCard(list){
             layer.append(toDoListLayer(list).check(), toDoListLayer(list).title(), toDoListLayer(list).dueDate(), toDoListLayer(list).priority(), createDeleteListBtn(list));
             return layer },
         titleCard: ()=>{
-            layer.append(toDoListLayer(list).title());
+            let titleCard = toDoListLayer(list).title(); 
+
+            function titleCardLimited() {
+                const maxLength = 10;
+                const layer = createDiv('title');
+                //console.log(titleCard.textContents = titleCard.textContent.substring(0, maxLength) + "...")
+                if(titleCard.textContent.length > maxLength){
+                    const titleCardLimit = titleCard.textContent.substring(0, maxLength) + "...";
+                    layer.append(titleCardLimit)
+                    console.log(layer);
+                    return layer;
+                }
+                else{
+                    console.log(titleCard);
+                    return titleCard;
+                }
+            };
+                console.log(titleCardLimited());
+            layer.append(titleCardLimited());
             return layer } 
     };
 }

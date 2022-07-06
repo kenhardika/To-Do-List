@@ -16,6 +16,8 @@
     --fontSizeTitleDesc: clamp(14px, 1.2vw, 1.2vw);
     --fontSizeSidebarNote: clamp(14px, 1.3vw, 1.3vw);
     --fontSizeSidebarList: clamp(10px, 1vw, 1vw);
+    --fontFamTitle: 'Mulish', sans-serif;
+    --fontFamSidebar: 'DM Sans', sans-serif;
 }
 
 .header{
@@ -34,14 +36,14 @@
 }
     .headerTitle{
         font-size: var(--fontSizeTitle);
-        font-family:'Mulish', sans-serif;
+        font-family: var(--fontFamTitle);
         font-weight: 600;
         color: var(--fontBlack);
     }
 
     .headerTitleDesc{
         font-size: var(--fontSizeTitleDesc);
-        font-family: 'Mulish', sans-serif;
+        font-family: var(--fontFamTitle);
 
     }
 
@@ -63,7 +65,7 @@
         /* text-shadow: 2px 4px 4px #0000004d; */
         grid-row: 1/4;
         /* border: 1px solid black; */
-        font-family: 'DM Sans', sans-serif;
+        font-family: var(--fontFamSidebar);
         font-weight: 600;
         
         border-right: 5px solid var(--orangeTangerine);
@@ -112,7 +114,7 @@
                     
                     gap: 10px;
                     padding: 7px;
-                    width: 180px;
+                    width: auto;
                     border: 2px solid var(--orangeTangerine);
                     border-radius: 20px;
                     background-color: var(--orangeTangerine);
@@ -153,17 +155,21 @@
             }
             .inputSection input, .inputSection select {
                 background-color: var(--baseColor);
-                border-radius: 20px;
+                border-radius: 10px;
+                font-family: var(--fontFamTitle);
             }
 
             #submitInput{
                 width: 60px;
-                height: 20px;
+                height: auto;
                 border-radius: 20px;
                 border: none;
                 background-color: var(--orangeTangerine);
                 color: white;
                 font-size: 16px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             #submitInput:hover {
                 background-color: #ff886b;
@@ -171,12 +177,20 @@
             #submitInput:active {
                 transform: translateY(2px);
             }
-
+            
             .inputForm[open]{
-                display: block;
+                display: flex;
+                flex-direction: row;
+                gap: 20px;
+                font-family: var(--fontFamTitle);
                 /* opacity: 1;
                 transition: opacity 0.5ms; */ 
             }
+                #inputTitle{
+                    width: max-content;
+                    height: 25px;
+                }
+
             .inputForm[close]{
                 display: none;
                 /* opacity: 0;
