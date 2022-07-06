@@ -45,17 +45,23 @@
     <div class="mainbar">
       <div class="inputSection">
         <button id="openFormInputBtn">+</button>
-        <form action="" class="inputForm" close>
-          <input type="text" id="inputTitle" data-input="userInput" placeholder="What's on your Schedule" required>
-          <input type="date" id="inputDate" data-input="userInput" min="2022-07-01" max="2099-12-31" required>
-          <label for="priority" id="labelPriority">Priority:</label>
-          <select id="inputPriority" name="priority" required>
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
-          </select>
-          <input type="submit" id="submitInput" value="add">
-        </form>
+        <div class="formClass">
+          <form action="" class="inputForm" close>
+            <input type="text" id="inputTitle" data-input="userInput" placeholder="What's on your Schedule" required>
+            <input type="date" id="inputDate" data-input="userInput" min="2022-07-01" max="2099-12-31" required>
+            <label for="priority" id="labelPriority">Priority:</label>
+            <select id="inputPriority" name="priority" required>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+            <input type="submit" id="submitInput" value="add">
+          </form>
+          <form action="" class="inputForm" close>
+            <textarea name="" id="description" cols="10" rows="2" data-input = "userInput" placeholder="description"></textarea>
+          </form>
+        </div>
+        
       </div>
       <div class="outputSection"></div>
     </div>
