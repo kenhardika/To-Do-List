@@ -4,7 +4,7 @@ import { toDoListCard } from "./toDoList";
 console.log('here we are');
 
 //gather data input tempelate
-function addToDoList(title, dueDate, priority = 'Low', checklist = false){ 
+function addToDoList(title, dueDate, priority, checklist, desc){ 
     let arrayList = [];
 
     function showArrayList(){
@@ -24,6 +24,7 @@ function addToDoList(title, dueDate, priority = 'Low', checklist = false){
         dueDate,
         priority,
         checklist,
+        desc,
         showArrayList,
         addToArrayList,
         removeFromArrayList
@@ -44,6 +45,10 @@ const getInput = () => {
         priority: ()=>{ 
             const input = document.getElementById('inputPriority');
             return input.value
+        },
+        desc: ()=>{
+            const input = document.getElementById('description');
+            return input.value
         }
     }
 }
@@ -61,7 +66,7 @@ function actionNewToDoList(e){
     e.preventDefault();
     //create To Do List
     //take the parameter from dom
-    let task = addToDoList(inputToDo.title(),inputToDo.dueDate(), inputToDo.priority());
+    let task = addToDoList(inputToDo.title(),inputToDo.dueDate(), inputToDo.priority(), false , inputToDo.desc());
     //add the variable of to do list to the aray 
     arrayToDo.addToArrayList(task);
     console.log(arrayToDo.showArrayList());
@@ -82,15 +87,16 @@ function openFormBtn(){
 }
 
 function toggleOpenClose(target){
-    const toggle = document.querySelector(`.${target}`);
-        if (toggle.hasAttribute('close','')) {
-            toggle.removeAttribute('close');
-            toggle.setAttribute('open','');
+    const toggle = document.querySelectorAll(`.${target}`);
+    toggle.forEach( (elm)=>{
+        if (elm.hasAttribute('close','')) {
+            elm.removeAttribute('close');
+            elm.setAttribute('open','');
         }
         else{
-            toggle.removeAttribute('open');
-            toggle.setAttribute('close','');
-        }
+            elm.removeAttribute('open');
+            elm.setAttribute('close','');
+        }});
 }
 
 function showToDoList(targetClass) {

@@ -36,15 +36,28 @@ function toDoListLayer(list){
             return layer; 
         },
         title: ()=> { return createToDoDiv(list, 'title')},
+        desc: ()=> { return createToDoDiv(list, 'desc')}, 
         dueDate: ()=> { return createToDoDiv(list, 'dueDate')},
         priority: ()=> { return createToDoDiv(list, 'priority')}
     }
 }
 
 function checklistCondition(list){
-    if (list.checklist == false) return '✕';
+    if (list.checklist == false) return '✕'; //should be radio button
     else return '✓';
 }
+
+function textLimiter(obj, className, maxLength) {
+    const layer = createDiv(`${className}`);
+    if(obj.textContent.length > maxLength){
+        const textLimit = obj.textContent.substring(0, maxLength) + "...";
+        layer.append(textLimit);
+        return layer;
+    }
+    else{
+        return obj;
+    }
+};
 
 //change so it can be partial wheter you wanna append title only
 function toDoListCard(list){
@@ -55,24 +68,7 @@ function toDoListCard(list){
             return layer },
         titleCard: ()=>{
             let titleCard = toDoListLayer(list).title(); 
-
-            function titleCardLimited() {
-                const maxLength = 10;
-                const layer = createDiv('title');
-                //console.log(titleCard.textContents = titleCard.textContent.substring(0, maxLength) + "...")
-                if(titleCard.textContent.length > maxLength){
-                    const titleCardLimit = titleCard.textContent.substring(0, maxLength) + "...";
-                    layer.append(titleCardLimit)
-                    console.log(layer);
-                    return layer;
-                }
-                else{
-                    console.log(titleCard);
-                    return titleCard;
-                }
-            };
-                console.log(titleCardLimited());
-            layer.append(titleCardLimited());
+            layer.append(textLimiter(titleCard, 'title', 10)); //with limited text.length on sidebar
             return layer } 
     };
 }
