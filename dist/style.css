@@ -232,8 +232,8 @@
                 display: grid;
                 grid-template-columns: 0.2fr 2fr 0.5fr 0.5fr 0.3fr;
                 grid-template-rows: 1fr 3fr;
-                height: 10vh;
-                width: auto;
+                height: auto;
+                width: 100%;
                 padding: 10px;
             }
                 .mainbar .toDoList div[class*="Div"]{
@@ -258,12 +258,9 @@
                     grid-row: 1/3;
                 }
         .outputSection{
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-template-rows: repeat(auto-fit,  minmax(2vw, 5vw));
+            display: flex;
+            flex-direction: column;
             height: 65vh;
-            align-items: flex-start;
-            justify-content: center;
             overflow-y: auto;
         }
 .footer{
