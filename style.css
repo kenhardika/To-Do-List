@@ -11,6 +11,7 @@
     --fontBlack: #332e2a;
     --shadowColor: #0000004d;
     --orangeTangerine: #EE6C4D;
+    --orangeHover:#ff886b;
 
     --fontSizeTitle:clamp(30px, 2.2vw, 3vw);
     --fontSizeTitleDesc: clamp(14px, 1.2vw, 1.2vw);
@@ -106,19 +107,27 @@
                         color: var(--fontColor);
                     }
                     
-                .myProjects p, .myNotes p {
+                .myProjects button, .myNotes button {
                     display: flex;
                     flex-direction: row;
                     align-items: center;
                     justify-content: left;
                     
+                    font-size: 20px;
+                    font-family: var(--fontFamSidebar);
                     gap: 10px;
                     padding: 7px;
-                    width: auto;
-                    border: 2px solid var(--orangeTangerine);
+                    width: 9.5vw;
                     border-radius: 20px;
                     background-color: var(--orangeTangerine);
                     color: var(--baseColor);
+                    border: none;
+                }
+                .myProjects button:hover, .myNotes button:hover {
+                    background-color: var(--orangeHover);
+                }
+                .myProjects button:active, .myNotes button:active {
+                    transform: translateY(2px);
                 }
 
 
@@ -149,7 +158,7 @@
                 font-size: 40px;
             }
             #openFormInputBtn:hover {
-                background-color: #ff886b;
+                background-color: var(--orangeHover);
             }
             #openFormInputBtn:active {
                 transform: translateY(2px);
@@ -173,7 +182,7 @@
                 justify-content: center;
             }
             #submitInput:hover {
-                background-color: #ff886b;
+                background-color: var(--orangeHover);
             }
             #submitInput:active {
                 transform: translateY(2px);
@@ -189,6 +198,14 @@
                 /* opacity: 1;
                 transition: opacity 0.5ms; */ 
             }
+            .inputForm[open]:last-child{
+                display: flex;
+                justify-content: flex-start;
+                width: auto;
+                height: 10vh;
+
+            }
+
                 #inputTitle{
                     width: max-content;
                     height: 25px;
@@ -199,6 +216,12 @@
                 /* #inputTitle:focus{
                     height: 40px;
                 } */
+                #description{
+                    resize: none;
+                    width: 31.5vw;
+                    height: 8vh;
+                    border-radius: 10px;
+                }
 
             .inputForm[close]{
                 display: none;
