@@ -7,13 +7,12 @@ function createDiv(name){
 }
 function createToDoDiv(list, name){
     const layer = createDiv(name);
-    // console.log(typeof(list[name]));
     layer.append(list[`${name}`]);
     return layer;
 }
 
 function createDeleteListBtn(list){
-    const layer = createDiv('deleteThisList');
+    const layer = createDiv('deleteBtnDiv');
     const delbtn = document.createElement('button');
     delbtn.id='deleteList';
     delbtn.textContent='delete';
@@ -31,14 +30,28 @@ function deleteListFunction(list){
 function toDoListLayer(list){
     return {
         check: ()=> {
+            const baseLayer = createDiv('checklistDiv');
             const layer = createDiv('checklist');
             layer.append(checklistCondition(list));
-            return layer; 
+            baseLayer.append(layer);
+            return baseLayer; 
         },
-        title: ()=> { return createToDoDiv(list, 'title')},
-        desc: ()=> { return createToDoDiv(list, 'desc')}, 
-        dueDate: ()=> { return createToDoDiv(list, 'dueDate')},
-        priority: ()=> { return createToDoDiv(list, 'priority')}
+        title: ()=> {
+            const layer = createDiv('titleDiv');
+            layer.append(createToDoDiv(list, 'title'));
+            return layer},
+        desc: ()=> { 
+            const layer = createDiv('descDiv');
+            layer.append(createToDoDiv(list, 'desc'));
+            return layer}, 
+        dueDate: ()=> { 
+            const layer = createDiv('dueDateDiv');
+            layer.append(createToDoDiv(list, 'dueDate'));
+            return layer},
+        priority: ()=> { 
+            const layer = createDiv('priorityDiv');
+            layer.append(createToDoDiv(list, 'priority'));
+            return layer}
     }
 }
 
@@ -59,12 +72,11 @@ function textLimiter(obj, className, maxLength) {
     }
 };
 
-//change so it can be partial wheter you wanna append title only
 function toDoListCard(list){
     const layer = createDiv('toDoList');
     return {
         allCard: ()=>{
-            layer.append(toDoListLayer(list).check(), toDoListLayer(list).title(), toDoListLayer(list).desc() , toDoListLayer(list).dueDate(), toDoListLayer(list).priority(), createDeleteListBtn(list));
+            layer.append(toDoListLayer(list).check(), toDoListLayer(list).title(), toDoListLayer(list).desc(), toDoListLayer(list).dueDate(), toDoListLayer(list).priority(), createDeleteListBtn(list));
             return layer },
         titleCard: ()=>{
             let titleCard = toDoListLayer(list).title(); 

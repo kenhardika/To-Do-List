@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { showToDoListSidebar } from "./sidebar";
 import { toDoListCard } from "./toDoList";
 
@@ -39,8 +40,8 @@ const getInput = () => {
             return input.value
         },
         dueDate: ()=>{ 
-            const input = new Date(document.getElementById('inputDate').value);
-            return ` ${input.getDate()} - ${input.getMonth()+1} - ${input.getFullYear()} ` ; //should try moment.js later
+            const formattedDate = format(new Date(document.getElementById('inputDate').value), 'dd-MM-yyyy');
+            return formattedDate;
         },
         priority: ()=>{ 
             const input = document.getElementById('inputPriority');
