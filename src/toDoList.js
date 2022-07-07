@@ -64,7 +64,7 @@ function toDoListCard(list){
     const layer = createDiv('toDoList');
     return {
         allCard: ()=>{
-            layer.append(toDoListLayer(list).check(), toDoListLayer(list).title(), toDoListLayer(list).dueDate(), toDoListLayer(list).priority(), createDeleteListBtn(list));
+            layer.append(toDoListLayer(list).check(), toDoListLayer(list).title(), toDoListLayer(list).desc() , toDoListLayer(list).dueDate(), toDoListLayer(list).priority(), createDeleteListBtn(list));
             return layer },
         titleCard: ()=>{
             let titleCard = toDoListLayer(list).title(); 
