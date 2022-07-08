@@ -56,9 +56,57 @@ function toDoListLayer(list){
 }
 
 function checklistCondition(list){
-    if (list.checklist == false) return '✕'; //should be radio button
-    else return '✓';
+   //function addChecklist() {
+  //  const layerChecklist = createDiv('layerChecklist');
+    const checklist = document.createElement('input');
+    checklist.type='checkbox';
+    checklist.id='checklist';
+    checklist.addEventListener('change', ()=>{ checklistChange(checklist, list)});
+    
+    if(list.checklist == true){
+        checklist.checked = true;
+        return checklist;
+    }
+    else if(list.checklist == false) {
+        checklist.checked = false;
+        return checklist;
+    }
+
+
+     //  layerChecklist.append(checklist);
+    //return checklist
+    //}
+    
+    // if (list.checklist == false) return '✕'; //should be radio button
+    // else return '✓';
 }
+
+function checklistChange(check, list){
+//console.log(check.checked);
+    if (check.checked === true) {
+        //checkboxChecked(check);
+        arrayToDo.changeChecklist(list);
+    //    console.log(arrayToDo.showArrayList());
+    }
+    else if (check.checked === false){
+        // checkboxUnchecked(check);
+        arrayToDo.changeChecklist(list);
+        //console.log(arrayToDo.showArrayList());
+    }
+}
+
+function checkboxChecked(check){
+    // checkboxes.forEach((ar)=>{ return ar.parentNode.parentNode.parentNode.classList.add('checked') })
+    //list.checklist = true;
+    check.parentNode.parentNode.style.backgroundColor="green";
+}
+
+function checkboxUnchecked(check){
+    //checkboxes.forEach((ar)=>{ return ar.parentNode.parentNode.parentNode.classList.add('unchecked') });
+    //list.checklist = false;
+    check.parentNode.parentNode.style.backgroundColor="whitesmoke";
+}
+
 
 function textLimiter(obj, className, maxLength) {
     const layer = createDiv(`${className}`);

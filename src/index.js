@@ -20,12 +20,46 @@ function addToDoList(title, dueDate, priority, checklist, desc){
         return arrayList = arrayList.filter((array)=> array.title !== removedTitle);
     }
 
+    function changeChecklist(checkedList){
+        // return this.books.find((book) => book.title === title)
+        // function findInArrayList(){
+        //   return arrayList.find((arr)=> arr.title === checkedList.title)
+        // }
+
+        function findArrayListIndex(){
+            return arrayList.findIndex((arr)=> arr.title === checkedList.title)
+        }
+        
+        if (checkedList.checklist == true){
+         return arrayList[findArrayListIndex()].checklist = false;
+        }
+        else if(checkedList.checklist == false){ 
+            return arrayList[findArrayListIndex()].checklist = true;
+        }
+        // console.log(arrayList);
+        // return  arrayList
+
+        // console.log(findArrayListIndex());
+        // console.log(checkedList);
+
+        // if(findInArrayList().checklist == false){ 
+        //     return findInArrayList().checklist = true;
+        // }
+        // else if(findInArrayList().checklist == true){ 
+        //     return findInArrayList().checklist = false;
+        // }
+       // console.log(findInArrayList().checklist);
+    }
+
+
+
     return {
         title,
         dueDate,
         priority,
         checklist,
         desc,
+        changeChecklist,
         showArrayList,
         addToArrayList,
         removeFromArrayList
