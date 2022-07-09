@@ -96,6 +96,11 @@
                     font-weight: 200;
                     overflow: hidden;
                 }
+                   .myNotes .myNoteList .toDoList{
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: flex-start;
+                    }
                     .myNoteList .toDoList:first-child{
                         padding-top: 10px;
                     }
@@ -204,7 +209,12 @@
                 height: 10vh;
 
             }
-
+                #checklist{
+                    accent-color: var(--orangeTangerine); 
+                    height: 30px;
+                    width: 30px;
+                    cursor: pointer;
+                }
                 #inputTitle{
                     width: max-content;
                     height: 25px;
@@ -227,48 +237,64 @@
                 /* opacity: 0;
                 transition: opacity 0.5ms; */
             }
-
-           .mainbar .toDoList{
+    .outputSection{
+        display: flex;
+        flex-direction: column;
+        height: 65vh;
+        overflow-y: auto;
+        gap: 10px;
+        padding: 0 20px 0 20px;
+    }
+           .outputSection .toDoList{
                 display: grid;
                 grid-template-columns: 0.2fr 2fr 0.5fr 0.5fr 0.3fr;
-                grid-template-rows: 1fr 3fr;
-                height: auto;
+                grid-template-rows: 1fr 2fr;
+                height: clamp(10vh, 11vh, auto);
                 width: 100%;
-                padding: 10px;
+                border-radius: 20px;
+                box-shadow: 1px 1px 4px 2px #c6c6c6;
+
+                font-family: var(--fontFamSidebar);
             }
-                .mainbar .toDoList div[class*="Div"]{
+                .outputSection .toDoList div[class*="Div"]{
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    border: 2px solid black;
                 }
+                .outputSection .titleDiv{
+                    font-size: 22px;
+                    padding: 15px 0 0 0;
+                }
+
                 .toDoList .checklistDiv{
                     grid-row: 1/3;
                 }
                 .toDoList .descDiv{
                     grid-row: 2/3;
+                    padding: 0 5px;
                 }
                 .toDoList .dueDateDiv{
+                    font-size: 30px;
                     grid-row: 1/3;
                 }
+                    .dueDate{
+                        width: 40px;
+                    }
+
                 .toDoList .priorityDiv{
+                    font-size: 22px;
                     grid-row: 1/3;
                 }
                 .toDoList .deleteBtnDiv{
                     grid-row: 1/3;
                 }
                 .unchecked{
+                    background-color: var(--orangeTangerine);
                     border: 2px solid var(--orangeTangerine);
                 }
                 .checked{
-                    border: 2px solid #5ef35e;
+                    background-color: var(--orangeHover);
                 }
-        .outputSection{
-            display: flex;
-            flex-direction: column;
-            height: 65vh;
-            overflow-y: auto;
-        }
 .footer{
     background-color: var(--baseColor);
     border-top: 5px solid var(--orangeTangerine);
