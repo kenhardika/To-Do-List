@@ -71,25 +71,21 @@ function checklistCondition(list){
         checklist.checked = false;
         return checklist;
     }
-
-
-     //  layerChecklist.append(checklist);
-    //return checklist
-    //}
-    
-    // if (list.checklist == false) return '✕'; //should be radio button
-    // else return '✓';
 }
 
 function checklistChange(check, list){
 //console.log(check.checked);
     if (check.checked === true) {
         //checkboxChecked(check);
+        addClassCheckedChecklist(check.parentNode.parentNode.parentNode);
+       // check.parentNode.parentNode.parentNode.style.border="2px solid green";
         arrayToDo.changeChecklist(list);
     //    console.log(arrayToDo.showArrayList());
     }
     else if (check.checked === false){
         // checkboxUnchecked(check);
+        addClassUncheckedChecklist(check.parentNode.parentNode.parentNode);
+       // check.parentNode.parentNode.parentNode.style.border="2px solid var(--orangeTangerine)";
         arrayToDo.changeChecklist(list);
         //console.log(arrayToDo.showArrayList());
     }
@@ -120,15 +116,37 @@ function textLimiter(obj, className, maxLength) {
     }
 };
 
-function toDoListCard(list){
+function addClassCheckedChecklist(layer){
+    layer.classList.remove('unchecked');
+    layer.classList.add('checked');
+}
+function addClassUncheckedChecklist(layer){
+    layer.classList.remove('checked');
+    layer.classList.add('unchecked');
+}
+
+function toDoListCard(list){ 
     const layer = createDiv('toDoList');
+    function checkChecklist(){
+        if (list.checklist === true){
+            addClassCheckedChecklist(layer);
+            // layer.style.border='2px solid green'; //could create sub class for this particular style
+            return layer
+        } else { 
+           addClassUncheckedChecklist(layer);
+            //layer.style.border='2px solid var(--orangeTangerine)';
+            return layer
+         }
+    }
+
     return {
         allCard: ()=>{
-            layer.append(toDoListLayer(list).check(), toDoListLayer(list).title(), toDoListLayer(list).desc(), toDoListLayer(list).dueDate(), toDoListLayer(list).priority(), createDeleteListBtn(list));
-            return layer },
+            const layerChecked = checkChecklist();
+            layerChecked.append(toDoListLayer(list).check(), toDoListLayer(list).title(), toDoListLayer(list).desc(), toDoListLayer(list).dueDate(), toDoListLayer(list).priority(), createDeleteListBtn(list));
+            return layerChecked },
         titleCard: ()=>{
             let titleCard = toDoListLayer(list).title(); 
-            layer.append(textLimiter(titleCard, 'title', 10)); //with limited text.length on sidebar
+            layer.append(textLimiter(titleCard, 'title', 15)); //with limited text.length on sidebar
             return layer } 
     };
 }
