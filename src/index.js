@@ -74,7 +74,7 @@ const getInput = () => {
             return input.value
         },
         dueDate: ()=>{ 
-            const formattedDate = format(new Date(document.getElementById('inputDate').value), 'dd-MM-yyyy');
+            const formattedDate = format(new Date(document.getElementById('inputDate').value), 'dd MM yy');
             return formattedDate;
         },
         priority: ()=>{ 
@@ -144,12 +144,12 @@ function loopArray(targetClass) {
     const layerTarget = document.querySelector(`.${targetClass}`);
     return{ 
         allCard: 
-            ()=>{   for (let list of arrayToDo.showArrayList()) {
+            ()=>{   for (let list of arrayToDo.showArrayList().reverse()) {
                         layerTarget.append(toDoListCard(list).allCard());
                     }
                 },
         titleCard:
-            ()=>{   for (let list of arrayToDo.showArrayList()) {
+            ()=>{   for (let list of arrayToDo.showArrayList().reverse()) {
                         layerTarget.append(toDoListCard(list).titleCard());
                     }
                 }
