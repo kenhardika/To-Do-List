@@ -257,6 +257,12 @@
                 .toDoList .deleteBtnDiv{
                     grid-row: 1/3;
                 }
+                .unchecked{
+                    border: 2px solid var(--orangeTangerine);
+                }
+                .checked{
+                    border: 2px solid #5ef35e;
+                }
         .outputSection{
             display: flex;
             flex-direction: column;
