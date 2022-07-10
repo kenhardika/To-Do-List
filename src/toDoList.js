@@ -15,7 +15,6 @@ function createDeleteListBtn(list){
     const layer = createDiv('deleteBtnDiv');
     const delbtn = document.createElement('button');
     delbtn.id='deleteList';
-    delbtn.textContent='delete';
     delbtn.onclick = ()=>{ deleteListFunction(list) };
     layer.append(delbtn);
     return layer;

@@ -121,6 +121,10 @@ function openFormBtn(){
     btn.addEventListener('click', ()=>{ toggleOpenClose('inputForm') });
 }
 
+// function toggleFadeIn(target){
+//     target.classList.add('transitionIn');
+// }
+
 function toggleOpenClose(target){
     const toggle = document.querySelectorAll(`.${target}`);
     toggle.forEach( (elm)=>{
