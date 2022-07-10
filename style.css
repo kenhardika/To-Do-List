@@ -209,12 +209,7 @@
                 height: 10vh;
 
             }
-                #checklist{
-                    accent-color: var(--orangeTangerine); 
-                    height: 30px;
-                    width: 30px;
-                    cursor: pointer;
-                }
+               
                 #inputTitle{
                     width: max-content;
                     height: 25px;
@@ -229,7 +224,6 @@
                     resize: none;
                     width: 31.5vw;
                     height: 8vh;
-                    
                 }
 
             .inputForm[close]{
@@ -251,6 +245,7 @@
                 grid-template-rows: 1fr 2fr;
                 height: clamp(10vh, 11vh, auto);
                 width: 100%;
+                border: none;
                 border-radius: 20px;
                 box-shadow: 1px 1px 4px 2px #c6c6c6;
 
@@ -268,6 +263,7 @@
 
                 .toDoList .checklistDiv{
                     grid-row: 1/3;
+                    border-right: 5px solid var(--baseColor);
                 }
                 .toDoList .descDiv{
                     grid-row: 2/3;
@@ -276,6 +272,8 @@
                 .toDoList .dueDateDiv{
                     font-size: 30px;
                     grid-row: 1/3;
+                    border-left: 5px solid var(--baseColor);
+                    border-right: 5px solid var(--baseColor);
                 }
                     .dueDate{
                         width: 40px;
@@ -285,8 +283,39 @@
                     font-size: 22px;
                     grid-row: 1/3;
                 }
+
+                    .priority{
+                        display: flex;
+                        justify-content: center;
+                        width: 100px;
+                    }
+
+                    .low{
+                        border: 2px solid white;
+                        border-radius: 10px;
+                        background-color: #9fff9f;
+                    }
+                    .medium{
+                        border: 2px solid white;
+                        border-radius: 10px;
+                        background-color: #fdfd8e;
+                    }
+                    .high{
+                        border: 2px solid white;
+                        border-radius: 10px;
+                        background-color: #ff6e6e;
+                    }
+
                 .toDoList .deleteBtnDiv{
                     grid-row: 1/3;
+                    border-left: 5px solid var(--baseColor);
+
+                }
+                #checklist{
+                    accent-color: var(--orangeTangerine); 
+                    height: 30px;
+                    width: 30px;
+                    cursor: pointer;
                 }
                 .unchecked{
                     background-color: var(--orangeTangerine);
