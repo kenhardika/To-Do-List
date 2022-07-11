@@ -22,6 +22,9 @@
     --fontSizeSidebarList: clamp(10px, 1vw, 1vw);
     --fontFamTitle: 'Mulish', sans-serif;
     --fontFamSidebar: 'DM Sans', sans-serif;
+
+    --fadeTime: 0.3s;
+    --checkedTime: 0.2s;
 }
 
 .header{
@@ -201,21 +204,31 @@
                 transition: transform 0.1s;
             }
             
-            .inputForm[open]{
+            .inputForm[open], .inputForm[close]{
                 display: flex;
                 flex-direction: row;
                 align-items: center;
                 justify-content: center;
                 gap: 20px;
                 font-family: var(--fontFamTitle);
-                /* opacity: 1;
-                transition: opacity 0.5ms; */ 
+                opacity: 1;
+                transition: opacity var(--fadeTime);
             }
-            .inputForm[open]:last-child{
+            .inputForm[open]:last-child, .inputForm[close]:last-child{
                 display: flex;
                 justify-content: flex-start;
                 width: auto;
                 height: 10vh;
+                opacity: 1;
+                transition: opacity var(--fadeTime);
+            }
+            
+            .inputForm[close]{
+                opacity: 0;
+            }
+
+            .inputForm[close]:last-child{
+                opacity: 0;
             }
             
                 #inputTitle{
@@ -229,21 +242,12 @@
                     color: #7c7c7c;
                 }
 
-                
-                /* #inputTitle:focus{
-                    height: 40px;
-                } */
                 #description{
                     resize: none;
                     width: 31.5vw;
                     height: 8vh;
                 }
 
-            .inputForm[close]{
-                display: none;
-                /* opacity: 0;
-                transition: opacity 0.5ms; */
-            }
     .outputSection{
         display: flex;
         flex-direction: column;
@@ -261,9 +265,24 @@
                 border: none;
                 border-radius: 20px;
                 box-shadow: 1px 1px 4px 2px #c6c6c6;
-
                 font-family: var(--fontFamSidebar);
+                /* opacity: 0;
+                transition: opacity var(--fadeTime); */
             }
+            /* .outputSection .toDoList.appear{
+                display: grid;
+                grid-template-columns: 0.2fr 2fr 0.5fr 0.5fr 0.3fr;
+                grid-template-rows: 1fr 2fr;
+                height: clamp(10vh, 11vh, auto);
+                width: 100%;
+                border: none;
+                border-radius: 20px;
+                box-shadow: 1px 1px 4px 2px #c6c6c6;
+                font-family: var(--fontFamSidebar);
+                opacity: 1;
+                transition: opacity var(--fadeTime);
+            } */
+
                 .outputSection .toDoList div[class*="Div"]{
                     display: flex;
                     align-items: center;
@@ -309,27 +328,33 @@
                         border: 2px solid white;
                         border-radius: 10px;
                         background-color: #648767;
+                        transition: background-color var(--checkedTime) ;
                     }
                     .toDoList.checked .low{
                         background-color: #a6bda8;
+                        transition: background-color var(--checkedTime) ;
                     }
 
                     .medium{
                         border: 2px solid white;
                         border-radius: 10px;
                         background-color: #5092ad;
+                        transition: background-color var(--checkedTime) ;
                     }
                     .toDoList.checked .medium{
                         background-color: #a1c6d4;
+                        transition: background-color var(--checkedTime) ;
                     }
 
                     .high{
                         border: 2px solid white;
                         border-radius: 10px;
                         background-color: #E0195F;
+                        transition: background-color var(--checkedTime) ;
                     }
                     .toDoList.checked .high{
                         background-color: #ff89b2;
+                        transition: background-color var(--checkedTime) ;
                     }
 
                 .toDoList .deleteBtnDiv{
@@ -359,11 +384,15 @@
                 }
                 .unchecked{
                     background-color: var(--orangeTangerine);
-                    border: 2px solid var(--orangeTangerine);
+                    color: var(--fontBlack);
+                    transition-property: background-color, color;
+                    transition-duration: var(--checkedTime);
                 }
                 .checked{
                     background-color: var(--checkedColorList);
                     color: var(--checkedFontList);
+                    transition-property: background-color, color;
+                    transition-duration: var(--checkedTime);
                 }
 .footer{
     background-color: var(--baseColor);
