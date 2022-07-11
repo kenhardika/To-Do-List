@@ -21,38 +21,16 @@ function addToDoList(title, dueDate, priority, checklist, desc){
     }
 
     function changeChecklist(checkedList){
-        // return this.books.find((book) => book.title === title)
-        // function findInArrayList(){
-        //   return arrayList.find((arr)=> arr.title === checkedList.title)
-        // }
-
         function findArrayListIndex(){
             return arrayList.findIndex((arr)=> arr.title === checkedList.title)
         }
-        
         if (checkedList.checklist == true){
          return arrayList[findArrayListIndex()].checklist = false;
         }
         else if(checkedList.checklist == false){ 
             return arrayList[findArrayListIndex()].checklist = true;
         }
-        // console.log(arrayList);
-        // return  arrayList
-
-        // console.log(findArrayListIndex());
-        // console.log(checkedList);
-
-        // if(findInArrayList().checklist == false){ 
-        //     return findInArrayList().checklist = true;
-        // }
-        // else if(findInArrayList().checklist == true){ 
-        //     return findInArrayList().checklist = false;
-        // }
-       // console.log(findInArrayList().checklist);
     }
-
-
-
     return {
         title,
         dueDate,
@@ -65,6 +43,7 @@ function addToDoList(title, dueDate, priority, checklist, desc){
         removeFromArrayList
     }
 }
+
 
 const getInput = () => {
     //const grabData = document.querySelector('input');
@@ -110,6 +89,23 @@ function actionNewToDoList(e){
     showToDoList('outputSection');
     showToDoListSidebar('myNoteList');
 }
+
+// function checkInputTitle(input){
+//     // input.value is a title value from form input
+//     const status = arrayToDo.showArrayList().some(arr=>arr.title === input.value);
+//     //const titleMatch = arrayToDo.showArrayList().find(arr=>arr.title === input.value);
+//     //console.log(titleMatch);
+//     //addPatternToInput(input, titleMatch);
+//     return status
+// }
+
+// function findTitleMatch(input){
+//     arrayToDo.showArrayList().find(arr=>arr.title === input.value);
+// }
+// terlalu jauh, udah keburu lewat input form
+// function addPatternToInput(input, titleMatch){
+//     input.setAttribute.pattern = `"^((?!damn)(?!fuck)(?!${titleMatch.title}).)*$"`;
+// }
 
 function submitInputForm() {
     const mainbar = document.querySelector('.mainbar');
