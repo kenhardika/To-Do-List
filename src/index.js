@@ -7,7 +7,8 @@ console.log('here we are');
 //gather data input tempelate
 function addToDoList(title, dueDate, priority, checklist, desc){ 
     let arrayList = [];
-
+    arrayList = getFromLocalStorage();
+    
     function showArrayList(){
         return arrayList;
      }
@@ -91,7 +92,7 @@ function actionNewToDoList(e){
      if (verifyInput(task) === true)  { 
         arrayToDo.addToArrayList(task);
         console.log(arrayToDo.showArrayList());
-        // addToLocalStorage();
+        addToLocalStorage();
         resetForm();
         toggleOpenClose('inputForm');
         showToDoList('outputSection');
@@ -125,6 +126,21 @@ function alertMessage(text){
 
 function addToLocalStorage(){
     localStorage.setItem('arrayList', JSON.stringify(arrayToDo.showArrayList()));
+    let arrayLocal = localStorage.getItem('arrayList');
+    console.log(JSON.parse(arrayLocal));
+}
+
+function getFromLocalStorage(){
+    let arrayLocal = localStorage.getItem('arrayList');
+    return JSON.parse(arrayLocal);
+}
+
+function fetchDataFromLocalStorage(){
+    
+    if(!localStorage.getItem('arrayList')) return;
+    else
+    showToDoList('outputSection');
+    showToDoListSidebar('myNoteList');
 }
 
 function submitInputForm() {
@@ -160,12 +176,12 @@ function loopArray(targetClass) {
     const layerTarget = document.querySelector(`.${targetClass}`);
     return{ 
         allCard: 
-            ()=>{   for (let list of arrayToDo.showArrayList().reverse()) {
+            ()=>{   for (let list of getFromLocalStorage().reverse()) {
                         layerTarget.append(toDoListCard(list).allCard());
                     }
                 },
         titleCard:
-            ()=>{   for (let list of arrayToDo.showArrayList().reverse()) {
+            ()=>{   for (let list of getFromLocalStorage().reverse()) {
                         layerTarget.append(toDoListCard(list).titleCard());
                     }
                 }
@@ -193,6 +209,7 @@ window.onload =()=> {
     submitInputForm();
     openFormBtn();
     autoUpdateDateInputDefault();
+    fetchDataFromLocalStorage();
 }
 
-export {addToDoList, loopArray, clearDisplay,showToDoList, showToDoListSidebar, arrayToDo}
+export {addToDoList, loopArray, clearDisplay,showToDoList, showToDoListSidebar, arrayToDo, addToLocalStorage, getFromLocalStorage}

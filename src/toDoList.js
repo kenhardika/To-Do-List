@@ -1,4 +1,4 @@
-import { arrayToDo, showToDoList, showToDoListSidebar } from ".";
+import { addToLocalStorage, arrayToDo, showToDoList, showToDoListSidebar } from ".";
 
 function createDiv(name){
     const layer = document.createElement('div');
@@ -22,6 +22,7 @@ function createDeleteListBtn(list){
 
 function deleteListFunction(list){
     arrayToDo.removeFromArrayList(list.title);
+    addToLocalStorage();
     showToDoList('outputSection');
     showToDoListSidebar('myNoteList');
 }
@@ -90,10 +91,12 @@ function checklistChange(check, list){
     if (check.checked === true) {
         addClassCheckedChecklist(check.parentNode.parentNode.parentNode);
         arrayToDo.changeChecklist(list);
+        addToLocalStorage();
     }
     else if (check.checked === false){
         addClassUncheckedChecklist(check.parentNode.parentNode.parentNode);
         arrayToDo.changeChecklist(list);
+        addToLocalStorage();
     }
 }
 
