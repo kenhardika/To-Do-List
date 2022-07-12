@@ -1,5 +1,4 @@
 import { format } from "date-fns";
-import { tr } from "date-fns/locale";
 import { showToDoListSidebar } from "./sidebar";
 import { toDoListCard } from "./toDoList";
 
@@ -99,11 +98,13 @@ function actionNewToDoList(e){
         toggleOpenClose('inputForm');
         showToDoList('outputSection');
         showToDoListSidebar('myNoteList');
+        autoUpdateDateInputDefault();
     }   
     else {
         resetForm();
         //toggle alert under the textarea
         alertMessage('Error duplicate title, try another title')
+        autoUpdateDateInputDefault();
     }
 }
 
@@ -123,21 +124,6 @@ function isTitleOk(data){
 function alertMessage(text){
     alert(text)
 }
-    // data.title is a title value from form input
-//     const status = arrayToDo.showArrayList().some(arr=>arr.title === input.value);
-//     //const titleMatch = arrayToDo.showArrayList().find(arr=>arr.title === input.value);
-//     //console.log(titleMatch);
-//     //addPatternToInput(input, titleMatch);
-//     return status
-// }
-
-// function findTitleMatch(input){
-//     arrayToDo.showArrayList().find(arr=>arr.title === input.value);
-// }
-// terlalu jauh, udah keburu lewat input form
-// function addPatternToInput(input, titleMatch){
-//     input.setAttribute.pattern = `"^((?!damn)(?!fuck)(?!${titleMatch.title}).)*$"`;
-// }
 
 function submitInputForm() {
     const mainbar = document.querySelector('.mainbar');
@@ -148,10 +134,6 @@ function openFormBtn(){
     const btn = document.getElementById('openFormInputBtn');
     btn.addEventListener('click', ()=>{ toggleOpenClose('inputForm') });
 }
-
-// function toggleFadeIn(target){
-//     target.classList.add('transitionIn');
-// }
 
 function toggleOpenClose(target){
     const toggle = document.querySelectorAll(`.${target}`);
@@ -194,9 +176,21 @@ function clearDisplay(parent) {
     }
 }
 
+function autoUpdateDateInputDefault(){
+    const inputDate = document.getElementById('inputDate');
+    inputDate.value = todaysDate();
+}
+
+function todaysDate(){
+    const date = new Date();
+    let todayPattern = format(date, 'yyyy-MM-dd')
+    return todayPattern;
+}
+
 window.onload =()=> {
     submitInputForm();
     openFormBtn();
+    autoUpdateDateInputDefault();
 }
 
 export {addToDoList, loopArray, clearDisplay,showToDoList, showToDoListSidebar, arrayToDo}
