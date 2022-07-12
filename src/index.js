@@ -7,14 +7,17 @@ console.log('here we are');
 //gather data input tempelate
 function addToDoList(title, dueDate, priority, checklist, desc){ 
     let arrayList = [];
-    arrayList = getFromLocalStorage();
+    
+    if(!localStorage.getItem('arrayList')) {
+        arrayList = [];
+    } else arrayList = getFromLocalStorage();
     
     function showArrayList(){
         return arrayList;
      }
 
     function addToArrayList(data){
-        arrayList.push(data) 
+       arrayList.push(data) 
     }
 
     function findArrayList(findTitle){
@@ -86,7 +89,6 @@ function actionNewToDoList(e){
     e.preventDefault();
     //take the parameter from dom
     let task = addToDoList(inputToDo.title(),inputToDo.dueDate(), inputToDo.priority(), false , inputToDo.desc());
-    
     //verify the input
     //add the variable of to do list to the aray 
      if (verifyInput(task) === true)  { 
@@ -109,7 +111,7 @@ function actionNewToDoList(e){
 
 function verifyInput(data){
     //check the array if there is any data.
-    if(arrayToDo.showArrayList().length === 0) return true
+    if(!arrayToDo.showArrayList()) return true;
     else return isTitleOk(data);
 }
 
@@ -131,12 +133,11 @@ function addToLocalStorage(){
 }
 
 function getFromLocalStorage(){
-    let arrayLocal = localStorage.getItem('arrayList');
-    return JSON.parse(arrayLocal);
+        let arrayLocal = localStorage.getItem('arrayList');
+        return JSON.parse(arrayLocal);
 }
 
 function fetchDataFromLocalStorage(){
-    
     if(!localStorage.getItem('arrayList')) return;
     else
     showToDoList('outputSection');

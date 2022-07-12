@@ -227,10 +227,12 @@
             
             .inputForm[close]{
                 opacity: 0;
+                pointer-events: none;
             }
 
             .inputForm[close]:last-child{
                 opacity: 0;
+                pointer-events: none;
             }
             
                 #inputTitle{
