@@ -280,23 +280,7 @@
                 border-radius: 20px;
                 box-shadow: 1px 1px 4px 2px #c6c6c6;
                 font-family: var(--fontFamSidebar);
-                /* opacity: 0;
-                transition: opacity var(--fadeTime); */
             }
-            /* .outputSection .toDoList.appear{
-                display: grid;
-                grid-template-columns: 0.2fr 2fr 0.5fr 0.5fr 0.3fr;
-                grid-template-rows: 1fr 2fr;
-                height: clamp(10vh, 11vh, auto);
-                width: 100%;
-                border: none;
-                border-radius: 20px;
-                box-shadow: 1px 1px 4px 2px #c6c6c6;
-                font-family: var(--fontFamSidebar);
-                opacity: 1;
-                transition: opacity var(--fadeTime);
-            } */
-
                 .outputSection .toDoList div[class*="Div"]{
                     display: flex;
                     align-items: center;
@@ -388,9 +372,15 @@
                         background-size: cover;
                     }
                     #deleteList:active{
-                        transform: translateY(2px);
+                        transform: translateY(5px);
                     }
-
+                    #deleteList:hover{
+                        transform: scale(1.2);
+                    }
+                    #deleteList, #deleteList:active, #deleteList:hover{
+                        transition: transform 0.2s;
+                    }
+                    
                 #checklist{
                     accent-color: var(--orangeTangerine); 
                     height: 30px;
@@ -414,16 +404,6 @@
     border-top: 5px solid var(--orangeTangerine);
     border-bottom: 10px solid var(--orangeTangerine);
     height: 5vh;
-}
-
-.transitionOut{
-    opacity: 0;
-    transition: opacity 0.3ms;
-}
-
-.transitionIn{
-    opacity: 1;
-    transition: opacity 0.3ms;
 }
 
 @keyframes fade-in{
