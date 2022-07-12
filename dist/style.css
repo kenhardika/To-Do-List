@@ -332,11 +332,11 @@
                     .low{
                         border: 2px solid var(--baseColor);
                         border-radius: 10px;
-                        background-color: #dfd21d;
+                        background-color: #c7bc1d;
                         transition: background-color var(--checkedTime) ;
                     }
                     .toDoList.checked .low{
-                        background-color: #d6cf6b;
+                        background-color: #b4ae59;
                         transition: background-color var(--checkedTime) ;
                     }
 

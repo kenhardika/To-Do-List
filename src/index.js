@@ -87,13 +87,11 @@ function actionNewToDoList(e){
     let task = addToDoList(inputToDo.title(),inputToDo.dueDate(), inputToDo.priority(), false , inputToDo.desc());
     
     //verify the input
-    // verifyInput(task);
-    console.log(verifyInput(task));
-    //console.log(verifyInput(task));
     //add the variable of to do list to the aray 
      if (verifyInput(task) === true)  { 
         arrayToDo.addToArrayList(task);
         console.log(arrayToDo.showArrayList());
+        // addToLocalStorage();
         resetForm();
         toggleOpenClose('inputForm');
         showToDoList('outputSection');
@@ -123,6 +121,10 @@ function isTitleOk(data){
 
 function alertMessage(text){
     alert(text)
+}
+
+function addToLocalStorage(){
+    localStorage.setItem('arrayList', JSON.stringify(arrayToDo.showArrayList()));
 }
 
 function submitInputForm() {
