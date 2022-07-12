@@ -92,12 +92,19 @@ function actionNewToDoList(e){
     console.log(verifyInput(task));
     //console.log(verifyInput(task));
     //add the variable of to do list to the aray 
+     if (verifyInput(task) === true)  { 
         arrayToDo.addToArrayList(task);
         console.log(arrayToDo.showArrayList());
         resetForm();
         toggleOpenClose('inputForm');
         showToDoList('outputSection');
         showToDoListSidebar('myNoteList');
+    }   
+    else {
+        resetForm();
+        //toggle alert under the textarea
+        alertMessage('Error duplicate title, try another title')
+    }
 }
 
 function verifyInput(data){
@@ -111,7 +118,11 @@ function isTitleOk(data){
     if (arrayToDo.findArrayList(data.title)) return false
     else return true;
     //console.log(!arrayToDo.showArrayList().find(arr=>arr.title === data.title));
-} 
+}
+
+function alertMessage(text){
+    alert(text)
+}
     // data.title is a title value from form input
 //     const status = arrayToDo.showArrayList().some(arr=>arr.title === input.value);
 //     //const titleMatch = arrayToDo.showArrayList().find(arr=>arr.title === input.value);
