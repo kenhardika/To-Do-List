@@ -13,8 +13,10 @@
     --shadowColor: #0000004d;
     --orangeTangerine: #EE6C4D;
     --orangeHover:#ff886b;
-    --checkedColorList: #ffb4a1;
+    --checkedColorList: #524943 ;
     --checkedFontList: #6d6d6d;
+    --blackBase: #332e2a;
+    --blackBaseHover: #524943;
 
     --fontSizeTitle:clamp(30px, 2.2vw, 3vw);
     --fontSizeTitleDesc: clamp(14px, 1.2vw, 1.2vw);
@@ -25,6 +27,7 @@
 
     --fadeTime: 0.3s;
     --checkedTime: 0.2s;
+    --borderSize: 2px;
 }
 
 .header{
@@ -35,7 +38,7 @@
     background-color: var(--baseColor);
     color: var(--fontColor) ;
     /* text-shadow: 2px 4px 4px var(--shadowColor); */
-    border-bottom: 10px solid var(--orangeTangerine);
+    border-bottom: var(--borderSize) solid var(--blackBase);
 }           
 
 .headerContainer{
@@ -51,6 +54,7 @@
     .headerTitleDesc{
         font-size: var(--fontSizeTitleDesc);
         font-family: var(--fontFamTitle);
+        color: var(--fontBlack);
 
     }
 
@@ -75,7 +79,7 @@
         font-family: var(--fontFamSidebar);
         font-weight: 600;
         
-        border-right: 5px solid var(--orangeTangerine);
+        border-right: var(--borderSize) solid var(--blackBase);
     }
         .sidebarList{
             display: flex;
@@ -115,7 +119,7 @@
                         align-items: center;
                         justify-content: center;
                         font-size: var(--fontSizeSidebarList);
-                        color: var(--fontColor);
+                        color: var(--fontBlack);
                     }
                     
                 .myProjects button, .myNotes button {
@@ -130,12 +134,12 @@
                     padding: 7px;
                     width: 9.5vw;
                     border-radius: 20px;
-                    background-color: var(--orangeTangerine);
+                    background-color: var(--blackBase);
                     color: var(--baseColor);
                     border: none;
                 }
                 .myProjects button:hover, .myNotes button:hover {
-                    background-color: var(--orangeHover);
+                    background-color: var(--blackBaseHover);
                 }
                 .myProjects button:active, .myNotes button:active {
                     transform: translateY(2px);
@@ -164,7 +168,7 @@
                 border-radius: 50%;
                 border: none;
                 background-color: var(--orangeTangerine);
-                color: white;
+                color: var(--baseColor);
                 font-size: 40px;
                 transition: transform 0.1s;
             }
@@ -191,7 +195,7 @@
                 width: 60px;
                 border-radius: 20px;
                 background-color: var(--orangeTangerine);
-                color: white;
+                color: var(--baseColor);
                 font-size: 16px;
                 transition: transform 0.1s;
                 border: 1px solid transparent;
@@ -289,6 +293,7 @@
                 .outputSection .titleDiv{
                     font-size: 22px;
                     padding: 15px 0 0 0;
+                    color: var(--baseColor);
                 }
 
                 .toDoList .checklistDiv{
@@ -299,6 +304,7 @@
                     grid-row: 2/3;
                     padding: 0 20px;
                     text-align: justify;
+                    color: var(--baseColor);
                 }
                 .toDoList .dueDateDiv{
                     font-size: 30px;
@@ -324,35 +330,35 @@
                     }
 
                     .low{
-                        border: 2px solid white;
+                        border: 2px solid var(--baseColor);
                         border-radius: 10px;
-                        background-color: #648767;
+                        background-color: #dfd21d;
                         transition: background-color var(--checkedTime) ;
                     }
                     .toDoList.checked .low{
-                        background-color: #a6bda8;
+                        background-color: #d6cf6b;
                         transition: background-color var(--checkedTime) ;
                     }
 
                     .medium{
-                        border: 2px solid white;
+                        border: 2px solid var(--baseColor);
                         border-radius: 10px;
-                        background-color: #5092ad;
+                        background-color: #e78325;
                         transition: background-color var(--checkedTime) ;
                     }
                     .toDoList.checked .medium{
-                        background-color: #a1c6d4;
+                        background-color: #e99d57;
                         transition: background-color var(--checkedTime) ;
                     }
 
                     .high{
-                        border: 2px solid white;
+                        border: 2px solid var(--baseColor);
                         border-radius: 10px;
-                        background-color: #E0195F;
+                        background-color: #cf1f1f;
                         transition: background-color var(--checkedTime) ;
                     }
                     .toDoList.checked .high{
-                        background-color: #ff89b2;
+                        background-color: #cf4d4d;
                         transition: background-color var(--checkedTime) ;
                     }
 
@@ -388,7 +394,7 @@
                     cursor: pointer;
                 }
                 .unchecked{
-                    background-color: var(--orangeTangerine);
+                    background-color: var(--blackBase);
                     color: var(--fontBlack);
                     transition-property: background-color, color;
                     transition-duration: var(--checkedTime);
@@ -401,8 +407,8 @@
                 }
 .footer{
     background-color: var(--baseColor);
-    border-top: 5px solid var(--orangeTangerine);
-    border-bottom: 10px solid var(--orangeTangerine);
+    border-top: var(--borderSize) solid var(--blackBase);
+    border-bottom: var(--borderSize) solid var(--blackBase);
     height: 5vh;
 }
 

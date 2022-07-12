@@ -49,7 +49,7 @@
           <form action="" class="inputForm" close>
             <input type="text" id="inputTitle" data-input="userInput" placeholder="Title of Activity" pattern="^((?!damn)(?!fuck).)*$" oninvalid="this.setCustomValidity('input error, try different title')"
             oninput="this.setCustomValidity('')"/ required>
-            <input type="date" id="inputDate" data-input="userInput" min="2000-01-01" max="2099-12-31" required>
+            <input type="date" id="inputDate" placeholder="dd/mm/yyyy" data-input="userInput" min="2000-01-01" max="2099-12-31" required>
             <label for="priority" id="labelPriority">Priority:</label>
             <select id="inputPriority" name="priority" required>
               <option value="Low">Low</option>
