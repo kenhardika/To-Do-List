@@ -232,7 +232,7 @@
             }
             
                 #inputTitle{
-                    width: 190px;
+                    width: 12vw;
                     height: 25px;
                 }
                 #inputDate {
@@ -244,7 +244,7 @@
 
                 #description{
                     resize: none;
-                    width: 31.5vw;
+                    width: 32vw;
                     height: 8vh;
                 }
 
@@ -299,7 +299,8 @@
                 }
                 .toDoList .descDiv{
                     grid-row: 2/3;
-                    padding: 0 5px;
+                    padding: 0 20px;
+                    text-align: justify;
                 }
                 .toDoList .dueDateDiv{
                     font-size: 30px;

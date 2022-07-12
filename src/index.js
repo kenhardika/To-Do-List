@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { tr } from "date-fns/locale";
 import { showToDoListSidebar } from "./sidebar";
 import { toDoListCard } from "./toDoList";
 
@@ -14,6 +15,10 @@ function addToDoList(title, dueDate, priority, checklist, desc){
 
     function addToArrayList(data){
         arrayList.push(data) 
+    }
+
+    function findArrayList(findTitle){
+       return arrayList.find(arr=>arr.title === findTitle)
     }
 
     function removeFromArrayList(removedTitle){
@@ -37,6 +42,7 @@ function addToDoList(title, dueDate, priority, checklist, desc){
         priority,
         checklist,
         desc,
+        findArrayList,
         changeChecklist,
         showArrayList,
         addToArrayList,
@@ -78,20 +84,35 @@ const inputToDo = getInput();
 
 function actionNewToDoList(e){
     e.preventDefault();
-    //create To Do List
     //take the parameter from dom
     let task = addToDoList(inputToDo.title(),inputToDo.dueDate(), inputToDo.priority(), false , inputToDo.desc());
+    
+    //verify the input
+    // verifyInput(task);
+    console.log(verifyInput(task));
+    //console.log(verifyInput(task));
     //add the variable of to do list to the aray 
-    arrayToDo.addToArrayList(task);
-    console.log(arrayToDo.showArrayList());
-    resetForm();
-    toggleOpenClose('inputForm');
-    showToDoList('outputSection');
-    showToDoListSidebar('myNoteList');
+        arrayToDo.addToArrayList(task);
+        console.log(arrayToDo.showArrayList());
+        resetForm();
+        toggleOpenClose('inputForm');
+        showToDoList('outputSection');
+        showToDoListSidebar('myNoteList');
 }
 
-// function checkInputTitle(input){
-//     // input.value is a title value from form input
+function verifyInput(data){
+    //check the array if there is any data.
+    if(arrayToDo.showArrayList().length === 0) return true
+    else return isTitleOk(data);
+}
+
+function isTitleOk(data){
+    //console.log(data.title);
+    if (arrayToDo.findArrayList(data.title)) return false
+    else return true;
+    //console.log(!arrayToDo.showArrayList().find(arr=>arr.title === data.title));
+} 
+    // data.title is a title value from form input
 //     const status = arrayToDo.showArrayList().some(arr=>arr.title === input.value);
 //     //const titleMatch = arrayToDo.showArrayList().find(arr=>arr.title === input.value);
 //     //console.log(titleMatch);
