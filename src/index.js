@@ -2,25 +2,32 @@ import { format } from "date-fns";
 import { showToDoListSidebar } from "./sidebar";
 import { toDoListCard } from "./toDoList";
 
-console.log('here we are');
+//console.log('here we are');
 const storageName = 'arrayNotes';
+
+// function getStorageName(name){
+//     let storageName = name;
+//     return {
+//         storageName
+//     }
+// }
+
 //gather data input tempelate
+
 function addToDoList(title, dueDate, priority, checklist, desc, nameStorage){ 
     let arrayList;
-    console.log(storageName);
-    if(localStorage.getItem(storageName)===null) {
+    if(localStorage.getItem(storageName) === null) {
         arrayList = [];
-        console.log(arrayList);
     } else {
         arrayList = getFromLocalStorage(storageName);
-        console.log(arrayList);
     }
+    
     function showArrayList(){
         return arrayList;
-     }
+    }
 
     function addToArrayList(data){
-       arrayList.push(data) 
+       arrayList.push(data); 
     }
 
     function findArrayList(findTitle){
@@ -32,8 +39,6 @@ function addToDoList(title, dueDate, priority, checklist, desc, nameStorage){
     }
 
     function changeChecklist(checkedList){
-        //arrayList = getFromLocalStorage(nameStorage);
-        //console.log(nameStorage);
         function findArrayListIndex(){
             return arrayList.findIndex((arr)=> arr.title === checkedList.title)
         }
@@ -61,7 +66,6 @@ function addToDoList(title, dueDate, priority, checklist, desc, nameStorage){
 
 
 const getInput = () => {
-    //const grabData = document.querySelector('input');
     return {
         title: ()=>{ 
             const input = document.getElementById('inputTitle');
@@ -91,7 +95,6 @@ function resetForm() {
 const arrayToDo = addToDoList();
 const inputToDo = getInput();
 
-
 function actionNewToDoList(e){
     e.preventDefault();
     //take the parameter from dom
@@ -100,7 +103,7 @@ function actionNewToDoList(e){
     //add the variable of to do list to the aray 
      if (verifyInput(task) === true)  { 
         arrayToDo.addToArrayList(task);
-        console.log(arrayToDo.showArrayList());
+        //console.log(arrayToDo.showArrayList());
         addToLocalStorage(storageName);
         resetForm();
         toggleOpenClose('inputForm');
@@ -146,9 +149,10 @@ function getFromLocalStorage(storageName){
 
 function fetchDataFromLocalStorage(targetOutputMain, nameStorage, targetOutputSidebar){
     if(!localStorage.getItem(nameStorage)) return;
-    else
-    showToDoList(targetOutputMain, nameStorage);
-    showToDoListSidebar(targetOutputSidebar, nameStorage);
+    else {
+        showToDoList(targetOutputMain, nameStorage); 
+        showToDoListSidebar(targetOutputSidebar, nameStorage);
+    }
 }
 
 function submitInputForm() {
@@ -219,11 +223,25 @@ function todaysDate(){
     return todayPattern;
 }
 
+function myNotesPage(){
+    const myNotesBtn = document.getElementById('myNotesBtn');   
+    myNotesBtn.onclick = ()=>{ console.log('myNotesArray'); }
+    fetchDataFromLocalStorage('outputSection', storageName, 'myNoteList');
+}
+
+function myProjectsPage(){
+    const myProjectsBtn = document.getElementById('myProjectsBtn');
+    myProjectsBtn.onclick = ()=>{ console.log('myProjectsArray'); }
+}
+
+
 window.onload =()=> {
     submitInputForm();
     openFormBtn();
     autoUpdateDateInputDefault();
     fetchDataFromLocalStorage('outputSection', storageName, 'myNoteList');
+    myNotesPage();
+    myProjectsPage();
 }
 
 export {addToDoList, loopArray, clearDisplay,showToDoList, showToDoListSidebar, arrayToDo, addToLocalStorage, getFromLocalStorage, storageName}
