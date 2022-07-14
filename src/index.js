@@ -3,15 +3,18 @@ import { showToDoListSidebar } from "./sidebar";
 import { toDoListCard } from "./toDoList";
 
 console.log('here we are');
-
+const storageName = 'arrayNotes';
 //gather data input tempelate
-function addToDoList(title, dueDate, priority, checklist, desc){ 
-    let arrayList = [];
-    
-    if(!localStorage.getItem('arrayList')) {
+function addToDoList(title, dueDate, priority, checklist, desc, nameStorage){ 
+    let arrayList;
+    console.log(storageName);
+    if(localStorage.getItem(storageName)===null) {
         arrayList = [];
-    } else arrayList = getFromLocalStorage();
-    
+        console.log(arrayList);
+    } else {
+        arrayList = getFromLocalStorage(storageName);
+        console.log(arrayList);
+    }
     function showArrayList(){
         return arrayList;
      }
@@ -29,11 +32,14 @@ function addToDoList(title, dueDate, priority, checklist, desc){
     }
 
     function changeChecklist(checkedList){
+        //arrayList = getFromLocalStorage(nameStorage);
+        //console.log(nameStorage);
         function findArrayListIndex(){
             return arrayList.findIndex((arr)=> arr.title === checkedList.title)
         }
         if (checkedList.checklist == true){
-         return arrayList[findArrayListIndex()].checklist = false;
+            console.log(arrayList);
+            return arrayList[findArrayListIndex()].checklist = false;
         }
         else if(checkedList.checklist == false){ 
             return arrayList[findArrayListIndex()].checklist = true;
@@ -85,20 +91,21 @@ function resetForm() {
 const arrayToDo = addToDoList();
 const inputToDo = getInput();
 
+
 function actionNewToDoList(e){
     e.preventDefault();
     //take the parameter from dom
-    let task = addToDoList(inputToDo.title(),inputToDo.dueDate(), inputToDo.priority(), false , inputToDo.desc());
+    let task = addToDoList(inputToDo.title(),inputToDo.dueDate(), inputToDo.priority(), false , inputToDo.desc(), storageName);
     //verify the input
     //add the variable of to do list to the aray 
      if (verifyInput(task) === true)  { 
         arrayToDo.addToArrayList(task);
         console.log(arrayToDo.showArrayList());
-        addToLocalStorage();
+        addToLocalStorage(storageName);
         resetForm();
         toggleOpenClose('inputForm');
-        showToDoList('outputSection');
-        showToDoListSidebar('myNoteList');
+        showToDoList('outputSection', storageName);
+        showToDoListSidebar('myNoteList', storageName);
         autoUpdateDateInputDefault();
     }   
     else {
@@ -126,22 +133,22 @@ function alertMessage(text){
     alert(text)
 }
 
-function addToLocalStorage(){
-    localStorage.setItem('arrayList', JSON.stringify(arrayToDo.showArrayList()));
-    let arrayLocal = localStorage.getItem('arrayList');
+function addToLocalStorage(storageName){
+    localStorage.setItem(storageName, JSON.stringify(arrayToDo.showArrayList()));
+    let arrayLocal = localStorage.getItem(storageName);
     console.log(JSON.parse(arrayLocal));
 }
 
-function getFromLocalStorage(){
-        let arrayLocal = localStorage.getItem('arrayList');
+function getFromLocalStorage(storageName){
+        let arrayLocal = localStorage.getItem(storageName);
         return JSON.parse(arrayLocal);
 }
 
-function fetchDataFromLocalStorage(){
-    if(!localStorage.getItem('arrayList')) return;
+function fetchDataFromLocalStorage(targetOutputMain, nameStorage, targetOutputSidebar){
+    if(!localStorage.getItem(nameStorage)) return;
     else
-    showToDoList('outputSection');
-    showToDoListSidebar('myNoteList');
+    showToDoList(targetOutputMain, nameStorage);
+    showToDoListSidebar(targetOutputSidebar, nameStorage);
 }
 
 function submitInputForm() {
@@ -167,23 +174,29 @@ function toggleOpenClose(target){
         }});
 }
 
-function showToDoList(targetClass) {
+function showToDoList(targetClass, nameStorage) {
     const layerTarget = document.querySelector(`.${targetClass}`);
     clearDisplay(layerTarget);
-    loopArray(targetClass).allCard();
+    loopArray(targetClass, nameStorage).allCard();
 }
 
-function loopArray(targetClass) {
+function loopArray(targetClass, nameStorage) {
     const layerTarget = document.querySelector(`.${targetClass}`);
+    const localSave = getFromLocalStorage(nameStorage);
+    //console.log(localSave);
     return{ 
         allCard: 
-            ()=>{   for (let list of getFromLocalStorage().reverse()) {
-                        layerTarget.append(toDoListCard(list).allCard());
+            ()=>{
+                //console.log(getFromLocalStorage(nameStorage));   
+                for (let list of localSave) {
+                        layerTarget.append(toDoListCard(list, nameStorage).allCard());
                     }
                 },
         titleCard:
-            ()=>{   for (let list of getFromLocalStorage().reverse()) {
-                        layerTarget.append(toDoListCard(list).titleCard());
+            ()=>{
+                //console.log(getFromLocalStorage(nameStorage));   
+                for (let list of localSave) {
+                        layerTarget.append(toDoListCard(list, nameStorage).titleCard());
                     }
                 }
     }
@@ -210,7 +223,7 @@ window.onload =()=> {
     submitInputForm();
     openFormBtn();
     autoUpdateDateInputDefault();
-    fetchDataFromLocalStorage();
+    fetchDataFromLocalStorage('outputSection', storageName, 'myNoteList');
 }
 
-export {addToDoList, loopArray, clearDisplay,showToDoList, showToDoListSidebar, arrayToDo, addToLocalStorage, getFromLocalStorage}
+export {addToDoList, loopArray, clearDisplay,showToDoList, showToDoListSidebar, arrayToDo, addToLocalStorage, getFromLocalStorage, storageName}

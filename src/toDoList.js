@@ -11,28 +11,28 @@ function createToDoDiv(list, name){
     return layer;
 }
 
-function createDeleteListBtn(list){
+function createDeleteListBtn(list, nameStorage){
     const layer = createDiv('deleteBtnDiv');
     const delbtn = document.createElement('button');
     delbtn.id='deleteList';
-    delbtn.onclick = ()=>{ deleteListFunction(list) };
+    delbtn.onclick = ()=>{ deleteListFunction(list, nameStorage) };
     layer.append(delbtn);
     return layer;
 }
 
-function deleteListFunction(list){
+function deleteListFunction(list, nameStorage){
     arrayToDo.removeFromArrayList(list.title);
-    addToLocalStorage();
-    showToDoList('outputSection');
-    showToDoListSidebar('myNoteList');
+    addToLocalStorage(nameStorage);
+    showToDoList('outputSection', nameStorage);
+    showToDoListSidebar('myNoteList', nameStorage);
 }
 
-function toDoListLayer(list){
+function toDoListLayer(list, nameStorage){
     return {
         check: ()=> {
             const baseLayer = createDiv('checklistDiv');
             const layer = createDiv('checklist');
-            layer.append(checklistCondition(list));
+            layer.append(checklistCondition(list, nameStorage));
             baseLayer.append(layer);
             return baseLayer; 
         },
@@ -71,11 +71,11 @@ function toDoListLayer(list){
     }
 }
 
-function checklistCondition(list){
+function checklistCondition(list, nameStorage){
     const checklist = document.createElement('input');
     checklist.type='checkbox';
     checklist.id='checklist';
-    checklist.addEventListener('change', ()=>{ checklistChange(checklist, list)});
+    checklist.addEventListener('change', ()=>{ checklistChange(checklist, list, nameStorage)});
     
     if(list.checklist == true){
         checklist.checked = true;
@@ -87,16 +87,18 @@ function checklistCondition(list){
     }
 }
 
-function checklistChange(check, list){
+function checklistChange(check, list, nameStorage){
     if (check.checked === true) {
+       // console.log(nameStorage);
         addClassCheckedChecklist(check.parentNode.parentNode.parentNode);
         arrayToDo.changeChecklist(list);
-        addToLocalStorage();
+        addToLocalStorage(nameStorage);
     }
     else if (check.checked === false){
+       // console.log(nameStorage);
         addClassUncheckedChecklist(check.parentNode.parentNode.parentNode);
         arrayToDo.changeChecklist(list);
-        addToLocalStorage();
+        addToLocalStorage(nameStorage);
     }
 }
 
@@ -121,7 +123,7 @@ function addClassUncheckedChecklist(layer){
     layer.classList.add('unchecked');
 }
 
-function toDoListCard(list){ 
+function toDoListCard(list, nameStorage){ 
     const layer = createDiv('toDoList');
     function checkChecklist(){
         if (list.checklist === true){
@@ -137,7 +139,7 @@ function toDoListCard(list){
     return {
         allCard: ()=>{
             const layerChecked = checkChecklist();
-            layerChecked.append(toDoListLayer(list).check(), toDoListLayer(list).title(), toDoListLayer(list).desc(), toDoListLayer(list).dueDate(), toDoListLayer(list).priority(), createDeleteListBtn(list));
+            layerChecked.append(toDoListLayer(list, nameStorage).check(), toDoListLayer(list).title(), toDoListLayer(list).desc(), toDoListLayer(list).dueDate(), toDoListLayer(list).priority(), createDeleteListBtn(list, nameStorage));
             return layerChecked },
         titleCard: ()=>{
             let titleCard = toDoListLayer(list).title(); 
