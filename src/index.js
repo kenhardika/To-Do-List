@@ -3,23 +3,23 @@ import { showToDoListSidebar } from "./sidebar";
 import { toDoListCard } from "./toDoList";
 
 //console.log('here we are');
-const storageName = 'arrayNotes';
+let storageName;
+function setStorageName(name){
+    console.log(name);
+    return storageName = name;
+}
 
-// function getStorageName(name){
-//     let storageName = name;
-//     return {
-//         storageName
-//     }
-// }
-
+setStorageName('myNotes');
 //gather data input tempelate
 
 function addToDoList(title, dueDate, priority, checklist, desc, nameStorage){ 
     let arrayList;
     if(localStorage.getItem(storageName) === null) {
         arrayList = [];
+        console.log(storageName + 'still empty, start new');
     } else {
         arrayList = getFromLocalStorage(storageName);
+        console.log('hit arrayList refresh from localStorage')
     }
     
     function showArrayList(){
@@ -43,10 +43,11 @@ function addToDoList(title, dueDate, priority, checklist, desc, nameStorage){
             return arrayList.findIndex((arr)=> arr.title === checkedList.title)
         }
         if (checkedList.checklist == true){
-            console.log(arrayList);
+           // console.log(arrayList);
             return arrayList[findArrayListIndex()].checklist = false;
         }
         else if(checkedList.checklist == false){ 
+            //console.log(arrayList);
             return arrayList[findArrayListIndex()].checklist = true;
         }
     }

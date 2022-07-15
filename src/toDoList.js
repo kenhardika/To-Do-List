@@ -95,7 +95,7 @@ function checklistChange(check, list, nameStorage){
         addToLocalStorage(nameStorage);
     }
     else if (check.checked === false){
-       // console.log(nameStorage);
+        //console.log(nameStorage);
         addClassUncheckedChecklist(check.parentNode.parentNode.parentNode);
         arrayToDo.changeChecklist(list);
         addToLocalStorage(nameStorage);
