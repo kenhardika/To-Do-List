@@ -11,20 +11,20 @@ function createToDoDiv(list, name){
     return layer;
 }
 
-function createDeleteListBtn(list, nameStorage){
+function createDeleteListBtn(list, nameStorage, setSidebarElm){
     const layer = createDiv('deleteBtnDiv');
     const delbtn = document.createElement('button');
     delbtn.id='deleteList';
-    delbtn.onclick = ()=>{ deleteListFunction(list, nameStorage) };
+    delbtn.onclick = ()=>{ deleteListFunction(list, nameStorage, setSidebarElm) };
     layer.append(delbtn);
     return layer;
 }
 
-function deleteListFunction(list, nameStorage){
+function deleteListFunction(list, nameStorage, setSidebarElm){
     arrayToDo.removeFromArrayList(list.title);
     addToLocalStorage(nameStorage);
     showToDoList('outputSection', nameStorage);
-    showToDoListSidebar('myNoteList', nameStorage);
+    showToDoListSidebar(setSidebarElm, nameStorage);
 }
 
 function toDoListLayer(list, nameStorage){
@@ -123,7 +123,7 @@ function addClassUncheckedChecklist(layer){
     layer.classList.add('unchecked');
 }
 
-function toDoListCard(list, nameStorage){ 
+function toDoListCard(list, nameStorage, setSidebarElm){ 
     const layer = createDiv('toDoList');
     function checkChecklist(){
         if (list.checklist === true){
@@ -139,7 +139,7 @@ function toDoListCard(list, nameStorage){
     return {
         allCard: ()=>{
             const layerChecked = checkChecklist();
-            layerChecked.append(toDoListLayer(list, nameStorage).check(), toDoListLayer(list).title(), toDoListLayer(list).desc(), toDoListLayer(list).dueDate(), toDoListLayer(list).priority(), createDeleteListBtn(list, nameStorage));
+            layerChecked.append(toDoListLayer(list, nameStorage).check(), toDoListLayer(list).title(), toDoListLayer(list).desc(), toDoListLayer(list).dueDate(), toDoListLayer(list).priority(), createDeleteListBtn(list, nameStorage, setSidebarElm));
             return layerChecked },
         titleCard: ()=>{
             let titleCard = toDoListLayer(list).title(); 
