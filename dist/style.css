@@ -91,26 +91,32 @@
             .myNotes, .myProjects{
                 display: flex;
                 flex-direction: column;
-                align-items: center;
                 justify-content: center;
                 width: 12vw;
-            }    
+            }
+            .myNoteBtnClass, .myProjectBtnClass{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
                 .myNoteList, .myProjectList {
                     display: flex;
                     flex-direction: column;
+                    justify-content: flex-start;
                     gap: 5px;
                     font-weight: 200;
                     overflow: hidden;
                 }
-                   .myNotes .myNoteList .toDoList{
+                   .myNotes .myNoteList .toDoList, .myProjects .myProjectList .toDoList{
                     display: flex;
                     align-items: flex-start;
                     justify-content: flex-start;
+                    padding-left: 2.5vw;
                     }
-                    .myNoteList .toDoList:first-child{
+                    .myNoteList .toDoList:first-child, .myProjectList .toDoList:first-child{
                         padding-top: 10px;
                     }
-                    .myNoteList .toDoList {
+                    .myNoteList .toDoList, .myProjectList .toDoList {
                         display: flex;
                         align-items: center;
                         justify-content: center;

@@ -2,31 +2,23 @@ import { format } from "date-fns";
 import { showToDoListSidebar } from "./sidebar";
 import { toDoListCard } from "./toDoList";
 
-//console.log('here we are');
 let storageName;
-let sidebarListElm; 
 function setStorageName(name){
-   // console.log(name);
-    console.log(storageName);
-    return storageName = name;
+    storageName = name;
 }
-function setSidebarList(className){
-    return sidebarListElm = className;
-}
-//setStorageName('myNotes');
-function onLoadStart(setStrgName, selectSidebarLayer){
+
+function onLoadStart(setStrgName){
     openFormBtn();
     setStorageName(setStrgName);
-    setSidebarList(selectSidebarLayer);
+   // setSidebarList(selectSidebarLayer);
     submitInputForm();
     autoUpdateDateInputDefault();
-    fetchDataFromLocalStorage('outputSection', setStrgName, selectSidebarLayer);
+    fetchDataFromLocalStorage('outputSection', storageName);
     //fetchDataFromLocalStorage('outputSection', 'myProjects', 'myProjectList');
     myNotesPage();
     myProjectsPage();
 }
-onLoadStart('myNotes', 'myNoteList');
-console.log(storageName);
+onLoadStart('myNotes');
 
 //gather data input tempelate
 
@@ -34,10 +26,8 @@ function addToDoList(title, dueDate, priority, checklist, desc, nameStorage){
     let arrayList;
     if(localStorage.getItem(storageName) === null) {
         arrayList = [];
-        console.log(storageName + ' still empty, start new');
     } else {
         arrayList = getFromLocalStorage(storageName);
-        console.log('hit arrayList refresh from localStorage');
     }
     
     function showArrayList(){
@@ -60,13 +50,18 @@ function addToDoList(title, dueDate, priority, checklist, desc, nameStorage){
         function findArrayListIndex(){
             return arrayList.findIndex((arr)=> arr.title === checkedList.title)
         }
+        console.log(arrayList[findArrayListIndex()]);
         if (checkedList.checklist == true){
            // console.log(arrayList);
-            return arrayList[findArrayListIndex()].checklist = false;
+            arrayList[findArrayListIndex()].checklist = false;
+            console.log(arrayList[findArrayListIndex()].checklist);
+            //console.log(arrayList);
         }
         else if(checkedList.checklist == false){ 
             //console.log(arrayList);
-            return arrayList[findArrayListIndex()].checklist = true;
+            arrayList[findArrayListIndex()].checklist = true;
+            console.log(arrayList[findArrayListIndex()].checklist);
+           // console.log(arrayList);
         }
     }
     return {
@@ -124,10 +119,12 @@ function actionNewToDoList(e){
         arrayToDo.addToArrayList(task);
         //console.log(arrayToDo.showArrayList());
         addToLocalStorage(storageName);
+        fetchDataFromLocalStorage('outputSection', storageName);
         resetForm();
         toggleOpenClose('inputForm');
-        showToDoList('outputSection', storageName);
-        showToDoListSidebar(sidebarListElm, storageName);
+        // showToDoList('outputSection', storageName);
+        // showToDoListSidebar('myNoteList', 'myNotes');
+        // showToDoListSidebar('myProjectList', 'myProjects'); 
         autoUpdateDateInputDefault();
     }   
     else {
@@ -162,20 +159,31 @@ function addToLocalStorage(storageName){
 }
 
 function getFromLocalStorage(storageName){
+    if(!localStorage.getItem(storageName)) return 
+    else{
         let arrayLocal = localStorage.getItem(storageName);
-        return JSON.parse(arrayLocal);
+        return JSON.parse(arrayLocal);}
 }
 
-function fetchDataFromLocalStorage(targetOutputMain, nameStorage, targetOutputSidebar){
-    if(!localStorage.getItem(nameStorage)) return;
-    else if(storageName ==! nameStorage){ //still not works this condition
-        console.log('hit Sidebar Only for this ' + nameStorage);
-        showToDoListSidebar(targetOutputSidebar, nameStorage);
-    }
-    else if(storageName === nameStorage){
-        console.log('hit storage name and name input for storage match');
+function fetchDataFromLocalStorage(targetOutputMain, nameStorage){
+    if(!localStorage.getItem(nameStorage)) 
+        {
+            const layerTarget = document.querySelector(`.outputSection`);
+            clearDisplay(layerTarget);
+        }
+    // else if(storageName ==! nameStorage){ //still not works this condition
+    //     console.log('hit Sidebar Only for this ' + nameStorage);
+    //     showToDoListSidebar(targetOutputSidebar, nameStorage);
+    // }
+    //else if(storageName === nameStorage){
+    else{
+        const layerTarget = document.querySelector(`.outputSection`);
+        clearDisplay(layerTarget);
+        //console.log('hit storage name and name input for storage match');
         showToDoList(targetOutputMain, nameStorage); 
-        showToDoListSidebar(targetOutputSidebar, nameStorage);
+//        showToDoListSidebar(targetOutputSidebar, nameStorage);
+        showToDoListSidebar('myNoteList', 'myNotes');
+        showToDoListSidebar('myProjectList', 'myProjects'); 
     }
 }
 
@@ -212,20 +220,22 @@ function loopArray(targetClass, nameStorage) {
     const layerTarget = document.querySelector(`.${targetClass}`);
     const localSave = getFromLocalStorage(nameStorage);
     //console.log(localSave);
+
     return{ 
         allCard: 
             ()=>{
                 //console.log(getFromLocalStorage(nameStorage));   
                 for (let list of localSave) {
-                        layerTarget.append(toDoListCard(list, nameStorage, sidebarListElm).allCard());
+                        layerTarget.append(toDoListCard(list, nameStorage).allCard());
                     }
                 },
         titleCard:
             ()=>{
-                //console.log(getFromLocalStorage(nameStorage));   
-                for (let list of localSave) {
-                        layerTarget.append(toDoListCard(list, nameStorage, sidebarListElm).titleCard());
-                    }
+                if (!localSave) return 
+                else{
+                    for (let list of localSave) {
+                            layerTarget.append(toDoListCard(list, nameStorage).titleCard());
+                        }}
                 }
     }
 }
@@ -250,18 +260,22 @@ function todaysDate(){
 function myNotesPage(){
     const myNotesBtn = document.getElementById('myNotesBtn');   
     myNotesBtn.onclick = ()=>{ 
-    console.log('myNotesArray');
-    //onLoadStart('myNotes', 'myNoteList');
-}
+        //onLoadStart('myNotes', 'myNoteList');
+        setStorageName('myNotes');
+        console.log(storageName);
+        fetchDataFromLocalStorage('outputSection', storageName);
+    }
    // fetchDataFromLocalStorage('outputSection', storageName, 'myNoteList');
 }
 
 function myProjectsPage(){
     const myProjectsBtn = document.getElementById('myProjectsBtn');
     myProjectsBtn.onclick = ()=>{ 
-    console.log('myProjectArray');    
-   // onLoadStart('myProjects', 'myProjectList');
+        setStorageName('myProjects');
+        console.log(storageName);
+        fetchDataFromLocalStorage('outputSection', storageName);
+        // onLoadStart('myProjects', 'myProjectList');
 }
 }
 
-export {addToDoList, loopArray, clearDisplay,showToDoList, showToDoListSidebar, arrayToDo, addToLocalStorage, getFromLocalStorage, storageName}
+export {addToDoList, loopArray, clearDisplay,showToDoList, showToDoListSidebar, arrayToDo, addToLocalStorage, getFromLocalStorage, fetchDataFromLocalStorage, storageName}
