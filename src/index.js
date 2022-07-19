@@ -248,20 +248,34 @@ function todaysDate(){
     return todayPattern;
 }
 
+function buttonChangeClicked(myBtn, otherBtn){
+    if(myBtn.classList.contains('toggledOn')){
+         return
+     } 
+     else if(!myBtn.classList.contains('toggledOn')) {
+        otherBtn.classList.remove('toggledOn');    
+        myBtn.classList.add('toggledOn');
+     }
+}
+
 function myNotesPage(){
-    const myNotesBtn = document.getElementById('myNotesBtn');   
+    const myNotesBtn = document.getElementById('myNotesBtn');
+    const myProjectsBtn = document.getElementById('myProjectsBtn');
     myNotesBtn.onclick = ()=>{ 
         setStorageName('myNotes');
         fetchDataFromLocalStorage('outputSection', storageName);
+        buttonChangeClicked(myNotesBtn, myProjectsBtn);
     }
 }
 
 function myProjectsPage(){
     const myProjectsBtn = document.getElementById('myProjectsBtn');
+    const myNotesBtn = document.getElementById('myNotesBtn');
     myProjectsBtn.onclick = ()=>{ 
         setStorageName('myProjects');
         fetchDataFromLocalStorage('outputSection', storageName);
-}
+        buttonChangeClicked( myProjectsBtn, myNotesBtn);
+    }
 }
 
 export {addToDoList, loopArray, clearDisplay,showToDoList, showToDoListSidebar, arrayToDo, addToLocalStorage, getFromLocalStorage, fetchDataFromLocalStorage, storageName}
