@@ -76,6 +76,8 @@
         font-weight: 600;
         
         border-right: var(--borderSize) solid var(--blackBase);
+        overflow-y: auto;
+        overflow-x: hidden;
     }
         .sidebarList{
             display: flex;
@@ -138,13 +140,17 @@
                     border-radius: 20px;
                     background-color: var(--blackBase);
                     color: var(--baseColor);
-                    border: none;
+                    border: 2px solid var(--blackBase);
                 }
                 .myProjects button:hover, .myNotes button:hover {
                     background-color: var(--blackBaseHover);
+                    border: 2px solid var(--blackBaseHover);
                 }
                 .myProjects button:active, .myNotes button:active {
                     transform: translateY(2px);
+                }
+                #myNotesBtn.toggledOn, #myProjectsBtn.toggledOn{
+                    border: 2px solid var(--orangeTangerine);
                 }
 
 
