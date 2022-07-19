@@ -23,10 +23,11 @@ function createDeleteListBtn(list, nameStorage){
 function deleteListFunction(list, nameStorage){
     arrayToDo.removeFromArrayList(list.title);
     addToLocalStorage(nameStorage);
-    showToDoList('outputSection', nameStorage);
-//    showToDoListSidebar(setSidebarElm, nameStorage);
-    showToDoListSidebar('myNoteList', 'myNotes');
-    showToDoListSidebar('myProjectList', 'myProjects'); 
+    fetchDataFromLocalStorage('outputSection', nameStorage);
+//     showToDoList('outputSection', nameStorage);
+// //    showToDoListSidebar(setSidebarElm, nameStorage);
+//     showToDoListSidebar('myNoteList', 'myNotes');
+//     showToDoListSidebar('myProjectList', 'myProjects'); 
 }
 
 function toDoListLayer(list, nameStorage){
