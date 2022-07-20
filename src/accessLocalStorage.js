@@ -7,7 +7,10 @@ function getFromLocalStorage(getStorageName) {
 }
 
 function addToLocalStorage(addStorageName, arrayInput) {
-  localStorage.setItem(addStorageName, JSON.stringify(arrayInput.showArrayList()));
+  localStorage.setItem(
+    addStorageName,
+    JSON.stringify(arrayInput.showArrayList()),
+  );
   const arrayLocal = localStorage.getItem(addStorageName);
   return arrayLocal;
 }

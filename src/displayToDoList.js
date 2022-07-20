@@ -22,8 +22,10 @@ function addClassUncheckedChecklist(layer) {
   layer.classList.add('unchecked');
 }
 function addChangeListener(elm, list, nameStorage) {
+  elm.addEventListener('change', () => {
   // eslint-disable-next-line no-use-before-define
-  elm.addEventListener('change', () => { checklistChange(elm, list, nameStorage); });
+    checklistChange(elm, list, nameStorage);
+  });
 }
 function checklistCondition(list, nameStorage) {
   const checklist = document.createElement('input');
@@ -133,20 +135,18 @@ function displayToDoList(targetClass, nameStorage) {
   let localSave = getFromLocalStorage(nameStorage);
 
   return {
-    allCard:
-              () => {
-                localSave = getFromLocalStorage(nameStorage);
-                localSave.forEach((list) => {
-                  layerTarget.append(toDoListCard(list, nameStorage).allCard());
-                });
-              },
-    titleCard:
-              () => {
-                if (!localSave) return;
-                localSave.forEach((list) => {
-                  layerTarget.append(toDoListCard(list, nameStorage).titleCard());
-                });
-              },
+    allCard: () => {
+      localSave = getFromLocalStorage(nameStorage);
+      localSave.forEach((list) => {
+        layerTarget.append(toDoListCard(list, nameStorage).allCard());
+      });
+    },
+    titleCard: () => {
+      if (!localSave) return;
+      localSave.forEach((list) => {
+        layerTarget.append(toDoListCard(list, nameStorage).titleCard());
+      });
+    },
   };
 }
 
@@ -180,13 +180,11 @@ function checklistChange(check, list, nameStorage) {
   if (check.checked === true) {
     addClassCheckedChecklist(check.parentNode.parentNode.parentNode);
     arrayToDo.changeChecklist(list);
-    console.log(nameStorage);
     addToLocalStorage(nameStorage, arrayToDo);
     fetchDataFromLocalStorage('outputSection', nameStorage);
   } else if (check.checked === false) {
     addClassUncheckedChecklist(check.parentNode.parentNode.parentNode);
     arrayToDo.changeChecklist(list);
-    console.log(nameStorage);
     addToLocalStorage(nameStorage, arrayToDo);
     fetchDataFromLocalStorage('outputSection', nameStorage);
   }
@@ -202,7 +200,9 @@ function createDeleteListBtn(list, nameStorage) {
   const layer = createDiv('deleteBtnDiv');
   const delbtn = document.createElement('button');
   delbtn.id = 'deleteList';
-  delbtn.onclick = () => { deleteListFunction(list, nameStorage); };
+  delbtn.onclick = () => {
+    deleteListFunction(list, nameStorage);
+  };
   layer.append(delbtn);
   return layer;
 }

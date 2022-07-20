@@ -1,7 +1,10 @@
 import { format } from 'date-fns';
 import { addToLocalStorage } from './accessLocalStorage';
 import {
-  addToDoList, arrayToDo, setStorageName, storageName,
+  addToDoList,
+  arrayToDo,
+  setStorageName,
+  storageName,
 } from './ArrayToDoList';
 import { fetchDataFromLocalStorage } from './displayToDoList';
 
@@ -13,7 +16,10 @@ const getInput = () => ({
     return input.value;
   },
   dueDate: () => {
-    const formattedDate = format(new Date(document.getElementById('inputDate').value), 'dd MM yy');
+    const formattedDate = format(
+      new Date(document.getElementById('inputDate').value),
+      'dd MM yy',
+    );
     return formattedDate;
   },
   priority: () => {
@@ -28,8 +34,10 @@ const getInput = () => ({
 
 function resetForm() {
   const input = document.querySelectorAll('[data-input = "userInput"]');
-  // eslint-disable-next-line no-param-reassign
-  input.forEach((inp) => { inp.value = null; });
+  input.forEach((inp) => {
+    // eslint-disable-next-line no-param-reassign
+    inp.value = null;
+  });
 }
 
 // The Logic after you click add
@@ -66,7 +74,9 @@ function toggleOpenClose(target) {
 
 function openFormBtn() {
   const btn = document.getElementById('openFormInputBtn');
-  btn.addEventListener('click', () => { toggleOpenClose('inputForm'); });
+  btn.addEventListener('click', () => {
+    toggleOpenClose('inputForm');
+  });
 }
 
 function todaysDate() {
