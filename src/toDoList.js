@@ -1,4 +1,4 @@
-import { addToLocalStorage, arrayToDo, fetchDataFromLocalStorage, showToDoList, showToDoListSidebar } from ".";
+import { addToLocalStorage, arrayToDo, fetchDataFromLocalStorage} from ".";
 
 function createDiv(name){
     const layer = document.createElement('div');
@@ -24,10 +24,6 @@ function deleteListFunction(list, nameStorage){
     arrayToDo.removeFromArrayList(list.title);
     addToLocalStorage(nameStorage);
     fetchDataFromLocalStorage('outputSection', nameStorage);
-//     showToDoList('outputSection', nameStorage);
-// //    showToDoListSidebar(setSidebarElm, nameStorage);
-//     showToDoListSidebar('myNoteList', 'myNotes');
-//     showToDoListSidebar('myProjectList', 'myProjects'); 
 }
 
 function toDoListLayer(list, nameStorage){
@@ -122,7 +118,7 @@ function textLimiter(obj, className, maxLength) {
     else{
         return obj;
     }
-};
+}
 
 function addClassCheckedChecklist(layer){
     layer.classList.remove('unchecked');

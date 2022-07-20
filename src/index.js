@@ -19,7 +19,7 @@ function onLoadStart(setStrgName){
 onLoadStart('myNotes');
 //gather data input tempelate
 
-function addToDoList(title, dueDate, priority, checklist, desc, nameStorage){ 
+function addToDoList(title, dueDate, priority, checklist, desc){ 
     let arrayList;
     if(localStorage.getItem(storageName) === null) {
         arrayList = [];
@@ -117,7 +117,7 @@ const inputToDo = getInput();
 function actionNewToDoList(e){
     e.preventDefault();
     //take the parameter from dom
-    let task = addToDoList(inputToDo.title(),inputToDo.dueDate(), inputToDo.priority(), false , inputToDo.desc(), storageName);
+    let task = addToDoList(inputToDo.title(),inputToDo.dueDate(), inputToDo.priority(), false , inputToDo.desc());
     //verify the input
     //add the variable of to do list to the aray 
      if (verifyInput(task) === true)  { 
