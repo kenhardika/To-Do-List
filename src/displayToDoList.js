@@ -1,5 +1,6 @@
-// eslint-disable-next-line import/no-cycle
-import { addToLocalStorage, arrayToDo, fetchDataFromLocalStorage } from '.';
+import { addToLocalStorage, getFromLocalStorage } from './accessLocalStorage';
+import { arrayToDo } from './ArrayToDoList';
+import clearDisplay from './clearDisplay';
 
 function createDiv(name) {
   const layer = document.createElement('div');
@@ -11,20 +12,6 @@ function createToDoDiv(list, name) {
   layer.append(list[`${name}`]);
   return layer;
 }
-function deleteListFunction(list, nameStorage) {
-  arrayToDo.removeFromArrayList(list.title);
-  addToLocalStorage(nameStorage);
-  fetchDataFromLocalStorage('outputSection', nameStorage);
-}
-
-function createDeleteListBtn(list, nameStorage) {
-  const layer = createDiv('deleteBtnDiv');
-  const delbtn = document.createElement('button');
-  delbtn.id = 'deleteList';
-  delbtn.onclick = () => { deleteListFunction(list, nameStorage); };
-  layer.append(delbtn);
-  return layer;
-}
 
 function addClassCheckedChecklist(layer) {
   layer.classList.remove('unchecked');
@@ -34,26 +21,8 @@ function addClassUncheckedChecklist(layer) {
   layer.classList.remove('checked');
   layer.classList.add('unchecked');
 }
-
-function checklistChange(check, list, nameStorage) {
-  console.log('checklistChanged');
-  if (check.checked === true) {
-    addClassCheckedChecklist(check.parentNode.parentNode.parentNode);
-    arrayToDo.changeChecklist(list);
-    console.log(nameStorage);
-    addToLocalStorage(nameStorage);
-    fetchDataFromLocalStorage('outputSection', nameStorage);
-  } else if (check.checked === false) {
-    addClassUncheckedChecklist(check.parentNode.parentNode.parentNode);
-    arrayToDo.changeChecklist(list);
-    console.log(nameStorage);
-    addToLocalStorage(nameStorage);
-    fetchDataFromLocalStorage('outputSection', nameStorage);
-  }
-}
-
 function addChangeListener(elm, list, nameStorage) {
-  // console.log(list);
+  // eslint-disable-next-line no-use-before-define
   elm.addEventListener('change', () => { checklistChange(elm, list, nameStorage); });
 }
 function checklistCondition(list, nameStorage) {
@@ -132,11 +101,9 @@ function toDoListCard(list, nameStorage) {
   function checkChecklist() {
     if (list.checklist === true) {
       addClassCheckedChecklist(layer);
-      // layer.style.border='2px solid green'; //could create sub class for this particular style
       return layer;
     }
     addClassUncheckedChecklist(layer);
-    // layer.style.border='2px solid var(--orangeTangerine)';
     return layer;
   }
   return {
@@ -148,16 +115,96 @@ function toDoListCard(list, nameStorage) {
         toDoListLayer(list).desc(),
         toDoListLayer(list).dueDate(),
         toDoListLayer(list).priority(),
+        // eslint-disable-next-line no-use-before-define
         createDeleteListBtn(list, nameStorage),
       );
       return layerChecked;
     },
     titleCard: () => {
       const titleCard = toDoListLayer(list).title();
-      layer.append(textLimiter(titleCard, 'title', 15)); // with limited text.length on sidebar
+      layer.append(textLimiter(titleCard, 'title', 15));
       return layer;
     },
   };
 }
 
-export { toDoListCard, toDoListLayer };
+function displayToDoList(targetClass, nameStorage) {
+  const layerTarget = document.querySelector(`.${targetClass}`);
+  let localSave = getFromLocalStorage(nameStorage);
+
+  return {
+    allCard:
+              () => {
+                localSave = getFromLocalStorage(nameStorage);
+                localSave.forEach((list) => {
+                  layerTarget.append(toDoListCard(list, nameStorage).allCard());
+                });
+              },
+    titleCard:
+              () => {
+                if (!localSave) return;
+                localSave.forEach((list) => {
+                  layerTarget.append(toDoListCard(list, nameStorage).titleCard());
+                });
+              },
+  };
+}
+
+function showToDoList(targetClass, nameStorage) {
+  const layerTarget = document.querySelector(`.${targetClass}`);
+  clearDisplay(layerTarget);
+  displayToDoList(targetClass, nameStorage).allCard();
+}
+
+function showToDoListSidebar(targetClass, nameStorage) {
+  const layerTarget = document.querySelector(`.${targetClass}`);
+  clearDisplay(layerTarget);
+  displayToDoList(targetClass, nameStorage).titleCard();
+}
+
+function fetchDataFromLocalStorage(targetOutputMain, nameStorage) {
+  if (!localStorage.getItem(nameStorage)) {
+    const layerTarget = document.querySelector('.outputSection');
+    clearDisplay(layerTarget);
+  } else {
+    const layerTarget = document.querySelector('.outputSection');
+    clearDisplay(layerTarget);
+    showToDoList(targetOutputMain, nameStorage);
+    showToDoListSidebar('myNoteList', 'myNotes');
+    showToDoListSidebar('myProjectList', 'myProjects');
+  }
+}
+
+function checklistChange(check, list, nameStorage) {
+  console.log('checklistChanged');
+  if (check.checked === true) {
+    addClassCheckedChecklist(check.parentNode.parentNode.parentNode);
+    arrayToDo.changeChecklist(list);
+    console.log(nameStorage);
+    addToLocalStorage(nameStorage, arrayToDo);
+    fetchDataFromLocalStorage('outputSection', nameStorage);
+  } else if (check.checked === false) {
+    addClassUncheckedChecklist(check.parentNode.parentNode.parentNode);
+    arrayToDo.changeChecklist(list);
+    console.log(nameStorage);
+    addToLocalStorage(nameStorage, arrayToDo);
+    fetchDataFromLocalStorage('outputSection', nameStorage);
+  }
+}
+
+function deleteListFunction(list, nameStorage) {
+  arrayToDo.removeFromArrayList(list.title);
+  addToLocalStorage(nameStorage, arrayToDo);
+  fetchDataFromLocalStorage('outputSection', nameStorage);
+}
+
+function createDeleteListBtn(list, nameStorage) {
+  const layer = createDiv('deleteBtnDiv');
+  const delbtn = document.createElement('button');
+  delbtn.id = 'deleteList';
+  delbtn.onclick = () => { deleteListFunction(list, nameStorage); };
+  layer.append(delbtn);
+  return layer;
+}
+
+export { displayToDoList, fetchDataFromLocalStorage };
